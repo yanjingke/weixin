@@ -1,0 +1,80 @@
+<extend name="Public/base"/>
+
+<block name="body">
+  	<div id="cs">
+  		
+	</div>
+	</block>
+	<block name="script">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  
+
+    <!-- Bootstrap -->
+    <link href="__STATIC__/datetimepicker/css/bootstrap.min.css" rel="stylesheet">
+
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__STATIC__/datetimepicker/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+    	 $(function () {
+        	 
+			var url= "{:U('Admin/PushHistory/queryall')}";
+	    		$.ajax({
+	    			url:url,
+	    			type: "get",    		
+        	success: function(data){
+        		var arr=JSON.parse(data);
+        		for(var i=0;i<arr.length;i+=4){
+    var html="<div class="+"'row'"+"style="+"'padding: 5px;'"+">"
+    for(var j=0;j<4;j++){
+        if(arr[i+j]==null){}
+        else{
+        		html+="<div class="+"'col-sm-4 col-md-3'"+">"
+            html+="<div class="+"thumbnail"+">"
+            html+="<p style="+"'color: rgb(205,205,205);'"+">更新于  "+arr[i+j].time+"</p>"
+            html+="<div style="+"'border-top:rgb(221,221,221)solid 1px;margin-bottom: 10px;'"+"></div>"
+            if(arr[i+j].juimage==0){
+                html+="<a href="+"'"+arr[i+j].historyjson[0].url+"'"+" target='view_window'"+">"
+                html+="<h5>"+arr[i+j].historyjson[0].title+"</h5>"
+                html+="<div style="+"'border-top:rgb(221,221,221)solid 1px;margin-bottom: 10px;'"+"></div>"
+                html+="<img src="+"'"+arr[i+j].historyjson[0].picurl+"'"+"alt="+"'...'" +"style="+"'height: 150px;width: 90%;'"+">"
+                html+="<div class="+"caption"+">"
+                 html+="<a href="+"'"+arr[i+j].historyjson[0].url+"'"+" target='view_window'"+">"
+                html+="<p>"+arr[i+j].historyjson[0].description+"</p></a></div></div></div>"
+            		html+="</a>"
+            }
+            if(arr[i+j].juimage==1){
+            		html+="<a href="+"'"+arr[i+j].historyjson[0].url+"'"+" target='view_window'"+">"
+                html+="<img src='"+arr[i+j].historyjson[0].picurl+"'"+"alt="+"'...'" +"style="+"'height: 150px;width: 90%;'"+">"
+                html+="</a>"
+                html+="<div style="+"'border-top:rgb(221,221,221)solid 1px;margin-top: 10px;'"+"></div>"
+                for(var m=1;m<arr[i+j].historyjson.length;m++){
+                    html+="<div class="+"'media'"+">"
+                    html+="<a href="+"'"+arr[i+j].historyjson[m].url+"'"+" target='view_window'"+">"
+                    html+="<div class="+"'media-body'"+">"
+                    html+="<h5 class="+"'media-heading'"+">"+arr[i+j].historyjson[m].title+"</h5>"
+                    html+="</div>"
+                    html+="<div class="+"'media-right'"+">"
+                    html+="<img class="+"'media-object'"+" src="+"'"+arr[i+j].historyjson[m].picurl+"'"+" alt="+"'...'"+" style="+"'height: 50px;height: 50px;'"+">"
+                    html+="</div></a></div>"
+                }
+                html+="</div></div>"
+            }
+        }
+    }
+    html+="</div>"
+    html+="<div style="+"'border-top:rgb(221,221,221)solid 1px;margin:10px;'"+"></div>"
+    $("#cs").append(html);
+}
+        		}
+	    	})
+    	 });
+    	
+    </script>
+</block>
+

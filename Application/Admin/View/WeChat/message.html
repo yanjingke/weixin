@@ -1,0 +1,97 @@
+<extend name="Public/base"/>
+<block name="body">
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            所有模板
+        </h2>
+    </div>
+
+    <!-- 按钮工具栏 -->
+    <div class="cf">
+        <div class="fl">
+            <a class="btn " href="{:U('addMsg')}">快速添加</a>
+            <a class="btn " href="javascript:void(0);" onclick="checkall()">批量删除</a>
+        </div>
+
+        <!-- 高级搜索 -->
+    </div>
+    <script>
+        function delemsg(id){
+            var url = "{:U('delmsg')}";
+            $.post(url,{id:id},function(data){
+                if(data=='1'){
+                    alert('删除成功');
+                }else{
+                    alert('删除失败');
+                }
+                window.location.reload();
+            });
+        }
+    </script>
+
+    <!-- 数据表格 -->
+    <div class="data-table">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="text-center">编号</th>
+                <th class="" width="50%">消息名称</th>
+                <th class="" width="20%">添加时间</th>
+                <th class="" width="20%">使用状态</th>
+                <th class="" width="10%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></th>
+                    <th>{$vo.id} </th>
+                    <td><a href="{:U('WeChat/editMsg?id='.$vo['id'])}">{$vo.title}</a></td>
+                    <td><span><?=date('Y-m-d',$vo['addtime'])?></span></td>
+                    <td><span>
+                        <if condition="$vo.use eq 1">
+                            <font style="color:red;">使用中...</font>
+                            <else />
+                            <a href="{:U('Home/Index/index')}">开始使用</a>
+                        </if>
+                    </span></td>
+                    <td>
+                        <a href="{:U('WeChat/editMsg?id='.$vo['id'])}" >编辑</a>
+                        <a href="javascript:void(0);" class="confirm " onclick="delemsg('{$vo.id}')">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+<span></span>
+    </div>
+
+    <!-- 分页 -->
+    <div class="page">
+        {$page}
+    </div>
+
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        function recommend(obj,a){
+            var url = $(obj).attr('u');
+
+            $.post(url,{id:a},function(data){
+                if(data=='1'){
+                    alert('推荐成功');
+                }else{
+                    alert('推荐失败');
+                }
+                window.location.reload();
+            });
+        }
+    </script>
+</block>

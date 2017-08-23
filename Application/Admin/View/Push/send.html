@@ -1,0 +1,51 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            网站列表
+        </h2>
+    </div>
+    <script>
+        function sendall()
+        {
+            var url = "{:U('Home/Index/sendAll')}";
+            $(".sel_btn").text('请稍后...').removeClass('sel_btn');
+            $.get(url,'',function(data){
+                if(data == 'ok')
+                {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+    <style>
+        .sel_btn{
+            height: 40px;
+            line-height: 40px;
+            padding: 0 11px;
+            background: #02bafa;
+            border: 1px #26bbdb solid;
+            border-radius: 3px;
+            /*color: #fff;*/
+            display: inline-block;
+            text-decoration: none;
+            font-size: 20px;
+            outline: none;
+        }
+    </style>
+    <div>
+        <h1>随机推送</h1>
+        <a href="javascript:;" onclick="sendall()" class="sel_btn">开始推送</a>
+    </div>
+
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+</block>

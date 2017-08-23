@@ -1,0 +1,155 @@
+<extend name="Public/base"/>
+<block name="body">
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            所有分类
+        </h2>
+    </div>
+    <script>
+        function deltags(id){
+            if(confirm('确定要删除吗?')){
+                $.ajax({
+                    type:'post',
+                    url:"{:U('delete')}",
+                    data:'id='+id,
+                    success:function(data){
+                        if(data == '1')
+                        {
+                            alert('已删除');
+                            window.location.reload();
+                        }
+                        else
+                        {
+                            alert('删除失败');
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+    <!-- 按钮工具栏 -->
+    <div class="cf">
+        <div class="fl">
+            <a class="btn " href="{:U('add')}">快速添加</a>
+            <!--<a class="btn " href="javascript:void(0);" onclick="checkall()">批量删除</a>-->
+        </div>
+
+        <!-- 高级搜索 -->
+    </div>
+
+
+    <!-- 数据表格 -->
+    <div class="data-table">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="text-center">编号</th>
+                <th class="text-center" width="40%">名称</th>
+                <th class="" width="20%">添加时间</th>
+                <th class="" width="20%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></th>
+                    <th>{$vo.id} </th>
+                    <th>{$vo.name} </th>
+                    <td><span><?=date('Y-m-d',$vo['addtime'])?></span></td>
+                    <td>
+                        <a href="{:U('Tags/edit?id='.$vo['id'])}" >编辑</a>
+                        <a href="javascript:void(0);" class="confirm " onclick="deltags('{$vo.id}')">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- 分页 -->
+    <div class="page">
+        {$page}
+    </div>
+
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        function recommend(obj,a){
+            var url = $(obj).attr('u');
+
+            $.post(url,{id:a},function(data){
+                if(data=='1'){
+                    alert('推荐成功');
+                }else{
+                    alert('推荐失败');
+                }
+                window.location.reload();
+            });
+        }
+        $(function(){
+            //搜索功能
+            $("#search").click(function(){
+                var url = $(this).attr('url');
+                var status = $("#sch-sort-txt").attr("data");
+                var query  = $('.search-form').find('input').serialize();
+                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+                query = query.replace(/^&/g,'');
+                if(status != ''){
+                    query += '&status=' + status + "&" + query;
+                }
+                if( url.indexOf('?')>0 ){
+                    url += '&' + query;
+                }else{
+                    url += '?' + query;
+                }
+                window.location.href = url;
+            });
+
+            /* 状态搜索子菜单 */
+            $(".search-form").find(".drop-down").hover(function(){
+                $("#sub-sch-menu").removeClass("hidden");
+            },function(){
+                $("#sub-sch-menu").addClass("hidden");
+            });
+            $("#sub-sch-menu li").find("a").each(function(){
+                $(this).click(function(){
+                    var text = $(this).text();
+                    $("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
+                    $("#sub-sch-menu").addClass("hidden");
+                })
+            });
+
+            //回车自动提交
+            $('.search-form').find('input').keyup(function(event){
+                if(event.keyCode===13){
+                    $("#search").click();
+                }
+            });
+
+            $('#time-start').datetimepicker({
+                format: 'yyyy-mm-dd',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+
+            $('#datetimepicker').datetimepicker({
+                format: 'yyyy-mm-dd',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true,
+                pickerPosition:'bottom-left'
+            })
+
+        })
+    </script>
+</block>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/weui.min.css"/>
+    <link rel="stylesheet" href="__CSS__/jquery-weui.min.css"/>
+    <link rel="stylesheet" href="__CSS__/style.css"/>
+    <script type="text/javascript" src="__JS__/jquery.min.js"></script>
+    <script type="text/javascript" src="__JS__/jquery-weui.min.js"></script>
+    <!--<script type="text/javascript" src="js/city-picker.js" charset="utf-8" ></script>-->
+    <script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+    <title>订阅</title>
+</head>
+<body>
+<script>
+    $(function(){
+        $(".cancel").css('background-image',"url(__IMG__/cancel.png)");
+    });
+    function order(id,is_order)
+    {
+            if(is_order == 'cancel')
+            {
+                var action = 'cancel';
+            }
+            else
+            {
+                var action = 'add';
+            }
+        console.log(action);
+            var tags = $(".tags").val();
+            if(tags != '' ||　action == 'cancel') {
+                var uid = {$uid};
+                $.ajax({
+                    type: 'post',
+                    url: "{:U('add')}",
+                    data: 'action=' + action + '&id=' + id + '&uid=' + uid + '&tags=' + tags,
+                    success: function (data) {
+                        if(data == '0')
+                        {
+                            alert('重复订阅');
+                        }
+                        window.location.reload();
+                    }
+                });
+            }
+    }
+</script>
+<div class="weui-tab__bd-item">
+    <div class="order-nav"><a href="{:U('Index/lists?uid='.$uid)}">查看分类</a>
+        <a href="{:U('Index/push?uid='.$uid)}" class="fr">推送设置</a>
+    </div>
+    <div class="dy-content">
+        <ul class="ts-input">
+            <notempty name="order">
+                <volist name="order" id="o">
+            <li> <span><img src="__IMG__/order.png" alt="" style="width:30px;height:30px;"></span><input type="text" id="tag{$v.id}" placeholder="请输入关键词查" u="{:U('getType')}" value="{$o.tag_name}"/> <a href="javascript:;" onclick="order('{$o.id}','cancel')" class="cancel"></a></li>
+                </volist>
+            </notempty>
+            <li> <span><img src="__IMG__/order.png" alt="" style="width:30px;height:30px;"></span><input type="text" class="tags" placeholder="请输入关键词" u="{:U('getType')}"/> <a href="javascript:;" onclick="order('{$v.id}','order')"></a></li>
+
+
+        </ul>
+
+</div>
+</div>
+
+</body>
+</html>

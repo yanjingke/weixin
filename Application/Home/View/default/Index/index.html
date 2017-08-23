@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/base.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/index.css" />
+        <link rel="stylesheet" href="__CSS__/weui.min.css"/>
+        <link rel="stylesheet" href="__CSS__/jquery-weui.min.css"/>
+        <link rel="stylesheet" href="__CSS__/style.css"/>
+        <link rel="stylesheet" href="__CSS__/banner.css"/>
+        <script type="text/javascript" src="__JS__/jquery.min.js"></script>
+        <script type="text/javascript" src="__JS__/jquery-weui.min.js"></script>
+        <script type="text/javascript" src="__JS__/jquery.js"></script>
+        <script type="text/javascript" src="__JS__/jquery.flexslider-min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+        <script type="text/javascript" src="__JS__/base.js"></script>
+        <title>微新闻</title>
+    </head>
+    <body>
+    <div class="block_home_slider">
+        <div id="home_slider" class="flexslider">
+            <ul class="slides">
+                <li>
+                    <div class="slide">
+                        <img src="__IMG__/pic_home_slider_1.jpg" alt="" />
+                        <div class="caption">
+                            <p class="title">国内金准营销服务中心</p>
+                            <p>90天让您的网站升级100倍。国内金准营销服务中心.国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="slide">
+                        <img src="__IMG__/pic_home_slider_2.jpg" alt="" />
+                        <div class="caption">
+                            <p class="title">国内金准营销服务中心</p>
+                            <p>90天让您的网站升级100倍。国内金准营销服务中心.国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="slide">
+                        <img src="__IMG__/pic_home_slider_3.jpg" alt="" />
+                        <div class="caption">
+                            <p class="title">国内金准营销服务中心</p>
+                            <p>90天让您的网站升级100倍。国内金准营销服务中心.国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="slide">
+                        <img src="__IMG__/pic_home_slider_4.jpg" alt="" />
+                        <div class="caption">
+                            <p class="title">国内金准营销服务中心</p>
+                            <p>90天让您的网站升级100倍。国内金准营销服务中心.国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心国内金准营销服务中心</p>
+                        </div>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#home_slider').flexslider({
+                    animation : 'slide',
+                    controlNav : true,
+                    directionNav : true,
+                    animationLoop : true,
+                    slideshow : false,
+                    useCSS : false
+                });
+            });
+
+        </script>
+    </div>
+    <div class="weui-tab" style="position:absolute;height: 100%;width:100%;">
+        <!--新闻-->
+        <div class="content">
+        <notempty name="news">
+        <ul class="tabslider yb-ul" style="padding:0 0.5rem;">
+            <volist name="news" id="n">
+                <a href="{$n.url}">
+                <li class="clearfix" >
+                    <div class="yb-ul-title clearfix" a="{$n.id}">
+                        <input type="hidden" name="id" value="{$n.id}">
+                        <h2 class="zq-name fL"><img src="__IMG__/gf.png">{$n.source}</h2>
+                        <span class="pro-name fL">{$n.tags}<img src="__IMG__/important.png" class="d-v"></span>
+                        <span class="hy-b fR">{$n.area}</span>
+                    </div>
+                    <div class="yb-ul-inf clearfix" style="border-top:1px solid #f0f0f0;" a="{$n.id}">
+                        <a href="{:U('Index/detail?id='.$n['id'])}">{$n.title}</a><span class="yb-time"><?=date('Y-m-d',$n['ptime'])?></span>
+                    </div>
+                    </li>
+                </a>
+            </volist>
+        </ul>
+        </notempty>
+        </div>
+        <!--查看更多-->
+        <div class="view-more tC"><a href="javascript:;" onclick="loadmore()">查看更多新闻</a></div>
+    </div>
+    </body>
+    <script>
+        function loadmore() {
+
+            var id = $(".tabslider li:last-child .yb-ul-title").attr('a');
+            var html = $(".tabslider").html();
+            var url = "{:U('more')}";
+            $.post(url,{id:id},function(data){
+                if(data)
+                {
+                    $(".tabslider").html(html+data);
+                }
+            });
+        }
+
+    </script>
+</html>

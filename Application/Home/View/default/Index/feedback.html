@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="__CSS__/jquery-weui.min.css"/>
+    <link rel="stylesheet" href="__CSS__/style.css"/>
+    <link rel="stylesheet" href="__CSS__/weui.min.css"/>
+    <title>意见反馈</title>
+</head>
+<body>
+    <div class="main-title cf" style="padding: 3% 3% 0 3%">
+        <h2>
+            意见反馈
+        </h2>
+    </div>
+    <!-- 标签页导航 -->
+    <div class="tab-content">
+        <input type="hidden" name="" id="url" value="{:U('get_lng_lat')}">
+        <!-- 表单 -->
+        <form id="form" action="{:U('feedsave')}" name="frm" method="post" onsubmit="return check()" onreset="cancle()">
+            <!-- 基础文档模型 -->
+            <!--<div class="form-item cf">-->
+                <!--<label class="item-label">标题<span class="check-tips">（消息类型）*</span></label>-->
+                <!--<div class="controls">-->
+                    <!--<input type="text" class="text input-large" name="title" value="" id="title">-->
+                <!--</div>-->
+            <!--</div>-->
+            <input type="hidden" name="uid" value="<?=$_GET['uid']?>">
+            <div class="controls" style=";overflow: hidden;margin: 5% 0">
+                <!--<label class="item-label checkbox">（意见或建议）</label>-->
+                <textarea name="content" id="content"  rows="10" style="width: 94%;margin-left: 3%;border: 1px solid #ccc" placeholder="请在此输入。。。"></textarea>
+            </div>
+            <div class="form-item " style="margin-left: 60%;">
+                <input type="reset" value="取消"style="background-color: #65dde6;color: #fff"
+                       class="btn submit-btn weui-btn weui-btn_mini">
+                <input type="submit" value="确定"style="background-color: #65dde6;color: #fff"
+                       class="weui-btn   weui-btn weui-btn_mini ">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<extend name="Public/base"/>
+<block name="body">
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            其他配置
+        </h2>
+    </div>
+
+    <!-- 按钮工具栏 -->
+    <div class="cf">
+        <div class="fl">
+            <a class="btn " href="{:U('addMenu')}">???</a>
+            <a class="btn " href="javascript:void(0);" onclick="checkall()">批量删除</a>
+            <a class="btn " href="javascript:void(0);" onclick="checkall()">批量删除</a>
+        </div>
+
+        <!-- 高级搜索 -->
+        <!--<div class="fr">-->
+            <!--<a class="btn " href="JavaScript:;" onclick="{:U('Home/Index/sendAll')}">启用配置</a>-->
+        <!--</div>-->
+    </div>
+    <script>
+        function delmenu(id){
+            var url = "{:U('delmenu')}";
+            $.post(url,{id:id},function(data){
+                if(data=='1'){
+                    alert('删除成功');
+                }else{
+                    alert('删除失败');
+                }
+                window.location.reload();
+            });
+        }
+    </script>
+
+
+
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        function recommend(obj,a){
+            var url = $(obj).attr('u');
+
+            $.post(url,{id:a},function(data){
+                if(data=='1'){
+                    alert('推荐成功');
+                }else{
+                    alert('推荐失败');
+                }
+                window.location.reload();
+            });
+        }
+
+    </script>
+</block>
