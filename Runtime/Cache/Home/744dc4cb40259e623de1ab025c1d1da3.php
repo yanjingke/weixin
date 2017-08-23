@@ -8,59 +8,155 @@
 </head>
 <body>
 <style type="text/css">
-    .content{
+    body {
+   
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    color: #4A4A4A ;
+    text-align: center; 
+}
+
+.box1{
+    width: 300px;
+    margin: 20px;
+    padding: 10px;
+    min-height: 200px;
+    position:relative;
+    display: inline-block;
+    background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(#fff), to(#fff), color-stop(.1,#f3f3f3));
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset;
+    -webkit-border-bottom-right-radius: 6px 50px;    
+}
+
+.box1:before{
+    content: '';
+    width: 50px;
+    height: 100px;
+    position:absolute;
+    bottom:0; right:0;
+    -webkit-box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+    z-index:-1;
+    -webkit-transform: translate(-35px,-40px)
+                        skew(0deg,30deg)
+                        rotate(-25deg);
+}
+
+.box1:after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    top:0; left:0;
+    position:absolute;
+    display: inline-block;
+    z-index:-1;
+    -webkit-box-shadow: -10px -10px 10px rgba(0, 0, 0, 0.2);
+    -webkit-transform: rotate(2deg)
+                        translate(20px,25px)
+                        skew(20deg);
+}
+
+.box1 img {
+    width: 100%;
+    margin-top: 15px;
+}
+
+p{ 
+    margin-top: 15px;
+    text-align: justify;
+}
+
+h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+a{
+    text-decoration: none;
+    color: #4A4A4A !important;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #6B6B6B !important ;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #6B6B6B !important ;
+}
+.content{
         margin:1rem;
     }
     .content-content{
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
     .content-content img{
         width:100%;
         height:200px;
+        margin-left:-2em ;
+    }
+  
+    .content{
+    	text-indent:0em;
     }
 </style>
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-     <script type="text/javascript">
-     $(function () {
-    	 var id=<?php echo ($_GET['id']); ?>;
-    	 var url= "<?php echo U('Admin/Relation/selectrelation','','');?>/relationid/"+id+".html";
-    	 $.ajax({
-			 url:url,
-			 type: "get", 
-			
-			 success: function(data){
-			 alert(data);
-    	 	}
-    	 })
-     })
-     </script>
-<div class="content">
-        <div style="text-align: center">
-                <p><?php echo ($res["title"]); ?></p>
-        </div>
-        <div>
-            <span style="font-size: 0.8rem;margin-left: 5%;color:darkred"><?php echo ($res["source"]); ?></span>
-            <span style="margin-left: 40%;font-size: 0.8rem;color:darkred" ><?=date('Y-m-d',$res['ptime'])?></span>
-        </div>
-    <hr>
-    <div class="content-content">
-        <?php echo ($res["content"]); ?>
-    </div>
-    <div>
-        <span style="font-size: 0.8rem">标签：
-            <?php if(($tags) != "null"): echo ($res["tags"]); endif; ?>
-        </span>
-        <hr>
-        <a href="<?php echo ($res["url"]); ?>" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">查看原文</a>
-        <hr>
-    </div>
-    <div>
-        <a href="<?php echo U('Index/detail?id='.$res['pre']);?>" style="margin-left:5%;text-decoration: none;color:black;">上一页</a>
-        <a href="<?php echo U('Index/detail?id='.$res['next']);?>" style="margin-left:40%;text-decoration: none;color:black;">下一页</a>
-    </div>
+<div id="div1" class="box1">
+	<div class="content">
+	        <div style="text-align: center">
+	        	<div style="text-align: center;background-color: rgb(190,62,24);color: rgb(255,255,255);">
+                	<h3 style="padding: 10px;"><?php echo ($res["title"]); ?></h3>
+        		</div>
+	        </div>
+	        <div>
+	            <span style="font-size: 0.8rem;margin-left: 5%;color:darkred"><?php echo ($res["source"]); ?></span>
+	            <span style="margin-left: 40%;font-size: 0.8rem;color:darkred" ><?=date('Y-m-d',$res['ptime'])?></span>
+	        </div>
+	    <hr>
+	    <div class="content-content">
+	        <?php echo ($res["content"]); ?>
+	    </div>
+	    <div>
+	    	<div>
+	    		<span style="font-size: 0.8rem">标签：
+	            	<?php if(($tags) != "null"): echo ($res["tags"]); endif; ?>
+	        	</span>
+	    	</div>
+	        <div>
+	        	<span style="font-size: 0.8rem">相关新闻：</span>
+	        	<hr>
+		        	<ul>
+	       			<li>
+	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
+
+" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
+	       			</li>
+	       			<li>
+	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
+
+" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
+	       			</li>
+	       			<li>
+	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
+
+" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
+	       			</li>
+	       		</ul>
+	       		<hr>
+	        </div>
+	       <div>
+	       	 	<a href="<?php echo ($res["url"]); ?>" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">查看原文</a>
+	        	<hr>
+	       </div>
+	       
+	    </div>
+	    <div>
+	        <a href="<?php echo U('Index/detail?id='.$res['pre']);?>" style="margin-left:5%;text-decoration: none;color:black;">上一页</a>
+	        <a href="<?php echo U('Index/detail?id='.$res['next']);?>" style="margin-left:40%;text-decoration: none;color:black;">下一页</a>
+	    </div>
+	</div>
 </div>
 </body>
 </html>
