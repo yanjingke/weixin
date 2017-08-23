@@ -94,6 +94,10 @@
         </h2>
     </div>
     <script>
+
+
+
+
         function clickbutton(id)
         {
             $("#button"+id).html('<span style="color:red">采集中,请稍后...</span>');
@@ -109,12 +113,12 @@
                 }
             });
         }
-        function delnets(id){
+        function delnets(Crawl_Id){
             if(confirm('确定要删除吗?')){
                 $.ajax({
                     type:'post',
                     url:"<?php echo U('delete');?>",
-                    data:'id='+id,
+                    data:'Crawl_Id='+Crawl_Id,
                     success:function(data){
                         if(data == '1')
                         {
@@ -130,12 +134,74 @@
                 });
             }
         }
+        function start(Crawl_Id){
+            $(".start").click(function(){
+                $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+
+                $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+            });
+
+            $.ajax({
+                type:'post',
+                url:"<?php echo U('start');?>",
+                data:'Crawl_Id='+Crawl_Id,
+                success:function(data){
+
+                     /*   alert(data[0]);
+                        window.location.reload();*/
+
+
+                }
+            });
+
+        }
+
+        function getall() {
+            $("#getall").click(function () {
+                $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+                $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+            })
+            $.ajax({
+                type: 'post',
+                url: "<?php echo U('start');?>",
+                data: 'Crawl_Id=' + "ALL",
+                success: function (data) {
+
+                    /*   alert(data[0]);
+                     window.location.reload();*/
+
+
+                }
+            });
+        }
+
+            function getall(){
+                $("#getsome").click(function(){
+                    $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+                    $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+                });
+                $.ajax({
+                    type:'post',
+                    url:"<?php echo U('start');?>",
+                    data:'Crawl_Id='+"ALL",
+                    success:function(data){
+
+                        /*   alert(data[0]);
+                         window.location.reload();*/
+
+
+                    }
+                });
+
+        }
+
     </script>
     <!-- 按钮工具栏 -->
     <div class="cf">
         <div class="fl">
             <a class="btn " href="<?php echo U('add');?>">快速添加</a>
-            <a class="btn " href="javascript:void(0);" onclick="getall()">全部采集</a>
+            <a id="getall" class="btn " href="javascript:void(0);" onclick="getall()">全部采集</a>
+            <a id="getsome" class="btn " href="javascript:void(0);" onclick="getsome()">采集选中</a>
         </div>
 
         <!-- 高级搜索 -->
@@ -146,7 +212,7 @@
     <div class="data-table">
         <table class="">
             <thead>
-            <tr>
+           <!-- <tr>
                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                 <th class="text-center">编号</th>
                 <th class="" width="10%">标题</th>
@@ -155,31 +221,54 @@
                 <th class="" width="10%">路由</th>
                 <th class="" width="10%">添加时间</th>
                 <th class="" width="10%">操作</th>
-            </tr>
+            </tr>-->
+           <tr>
+               <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+               <th class="text-center">编号</th>
+               <th class="" width="10%">地区组织/机构</th>
+               <th class="" width="20%">链接地址</th>
+               <th class="" width="10%">网页类型</th>
+               <th class="" width="15%">采集</th>
+               <th class="" width="10%">可爬取</th>
+               <th class="" width="10%">地区</th>
+               <th class="" width="10%">爬取时间</th>
+               <th class="" width="10%">操作</th>
+           </tr>
             </thead>
             <tbody>
             <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="<?php echo ($vo["id"]); ?>" /></th>
-                    <th><?php echo ($vo["id"]); ?> </th>
-                    <td><a href="<?php echo U('Nets/edit?id='.$vo['id']);?>"><?php echo ($vo["title"]); ?></a></td>
-                    <td><?php echo ($vo["url"]); ?></td>
-                    <td id="button<?php echo ($vo["id"]); ?>"   url="<?php echo ($vo["url"]); ?>"><a href="<?php echo U($vo['routes']);?>">开始</a></td>
-                    <td><?php echo ($vo["routes"]); ?></td>
-                    <td><span><?=date('Y-m-d',$vo['addtime'])?></span></td>
+                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="<?php echo ($vo["Crawl_Id"]); ?>" /></th>
+                    <th><?php echo ($vo["Crawl_Id"]); ?> </th>
+                    <td><?php echo ($vo["Crawl_Org"]); ?></td>
+                    <td><?php echo ($vo["Crawl_Url"]); ?></td>
+
                     <td>
-                        <!--<?php if(($vo["status"]) == "1"): ?>-->
-                            <!--<a href="javascript:void(0);" onclick="recommend(this,'<?php echo ($vo["id"]); ?>','cancel')" u="<?php echo U('recommend');?>" style="color:red;">禁用</a>-->
-                        <!--<?php endif; ?>-->
-                        <!--<?php if(($vo["status"]) == "0"): ?>-->
-                            <!--<a href="javascript:void(0);" onclick="recommend(this,'<?php echo ($vo["id"]); ?>','add')" u="<?php echo U('recommend');?>">启用</a>-->
-                        <!--<?php endif; ?>-->
-                        <a href="<?php echo U('Nets/edit?id='.$vo['id']);?>" >编辑</a>
-                        <a href="javascript:void(0);" class="confirm " onclick="delnets('<?php echo ($vo["id"]); ?>')">删除</a>
+                        <?php if($vo["Web_Type"] == a ): ?>立法动态
+                            <?php elseif($vo["Web_Type"] == b): ?> 立法公示
+                            <?php elseif($vo["Web_Type"] == c): ?>新法速递
+                            <?php elseif($vo["Web_Type"] == d): ?>立法计划
+                            <?php else: ?> 其他<?php endif; ?>
+                    </td>
+
+                    <td><a class="start" href="javascript:void(0);"  onclick="start('<?php echo ($vo["Crawl_Id"]); ?>')">开始</a> </td>
+
+
+
+                    <td>
+                        <?php if($vo["Crawl_Yes"] == 0 ): ?>不能爬取
+                            <?php else: ?> 能爬取<?php endif; ?>
+                    </td>
+
+                    <td><?php echo ($vo["Crawl_Distric"]); ?></td>
+                    <td><span><?=date('Y-m-d',$vo['Crawl_DateTime'])?></span></td>
+                    <td>
+                        <a href="<?php echo U('Nets/edit?Crawl_Id='.$vo['Crawl_Id']);?>" >编辑</a>
+                        <a href="javascript:void(0);" class="confirm " onclick="delnets('<?php echo ($vo["Crawl_Id"]); ?>')">删除</a>
                     </td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
             </tbody>
         </table>
-        
+
     </div>
 
     <!-- 分页 -->
@@ -298,6 +387,8 @@
                 window.location.reload();
             });
         }
+
+
         $(function(){
             //搜索功能
             $("#search").click(function(){

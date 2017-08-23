@@ -19,6 +19,24 @@
         height:200px;
     }
 </style>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <script type="text/javascript">
+     $(function () {
+    	 var id={$_GET['id']};
+    	 var url= "{:U('Admin/Relation/selectrelation','','')}/relationid/"+id+".html";
+    	 $.ajax({
+			 url:url,
+			 type: "get", 
+			
+			 success: function(data){
+			 alert(data);
+    	 	}
+    	 })
+     })
+     </script>
 <div class="content">
         <div style="text-align: center">
                 <p>{$res.title}</p>

@@ -7,6 +7,10 @@
         </h2>
     </div>
     <script>
+
+
+
+
         function clickbutton(id)
         {
             $("#button"+id).html('<span style="color:red">采集中,请稍后...</span>');
@@ -22,12 +26,12 @@
                 }
             });
         }
-        function delnets(id){
+        function delnets(Crawl_Id){
             if(confirm('确定要删除吗?')){
                 $.ajax({
                     type:'post',
                     url:"{:U('delete')}",
-                    data:'id='+id,
+                    data:'Crawl_Id='+Crawl_Id,
                     success:function(data){
                         if(data == '1')
                         {
@@ -43,12 +47,74 @@
                 });
             }
         }
+        function start(Crawl_Id){
+            $(".start").click(function(){
+                $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+
+                $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+            });
+
+            $.ajax({
+                type:'post',
+                url:"{:U('start')}",
+                data:'Crawl_Id='+Crawl_Id,
+                success:function(data){
+
+                     /*   alert(data[0]);
+                        window.location.reload();*/
+
+
+                }
+            });
+
+        }
+
+        function getall() {
+            $("#getall").click(function () {
+                $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+                $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+            })
+            $.ajax({
+                type: 'post',
+                url: "{:U('start')}",
+                data: 'Crawl_Id=' + "ALL",
+                success: function (data) {
+
+                    /*   alert(data[0]);
+                     window.location.reload();*/
+
+
+                }
+            });
+        }
+
+            function getall(){
+                $("#getsome").click(function(){
+                    $(this).html("<b style='color: #ab2412'>正在爬取</b>");
+                    $(this).removeAttr('onclick');//去掉a标签中的onclick事件
+                });
+                $.ajax({
+                    type:'post',
+                    url:"{:U('start')}",
+                    data:'Crawl_Id='+"ALL",
+                    success:function(data){
+
+                        /*   alert(data[0]);
+                         window.location.reload();*/
+
+
+                    }
+                });
+
+        }
+
     </script>
     <!-- 按钮工具栏 -->
     <div class="cf">
         <div class="fl">
             <a class="btn " href="{:U('add')}">快速添加</a>
-            <a class="btn " href="javascript:void(0);" onclick="getall()">全部采集</a>
+            <a id="getall" class="btn " href="javascript:void(0);" onclick="getall()">全部采集</a>
+            <a id="getsome" class="btn " href="javascript:void(0);" onclick="getsome()">采集选中</a>
         </div>
 
         <!-- 高级搜索 -->
@@ -59,7 +125,7 @@
     <div class="data-table">
         <table class="">
             <thead>
-            <tr>
+           <!-- <tr>
                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                 <th class="text-center">编号</th>
                 <th class="" width="10%">标题</th>
@@ -68,33 +134,59 @@
                 <th class="" width="10%">路由</th>
                 <th class="" width="10%">添加时间</th>
                 <th class="" width="10%">操作</th>
-            </tr>
+            </tr>-->
+           <tr>
+               <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+               <th class="text-center">编号</th>
+               <th class="" width="10%">地区组织/机构</th>
+               <th class="" width="20%">链接地址</th>
+               <th class="" width="10%">网页类型</th>
+               <th class="" width="15%">采集</th>
+               <th class="" width="10%">可爬取</th>
+               <th class="" width="10%">地区</th>
+               <th class="" width="10%">爬取时间</th>
+               <th class="" width="10%">操作</th>
+           </tr>
             </thead>
             <tbody>
             <volist name="list" id="vo">
                 <tr>
-                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></th>
-                    <th>{$vo.id} </th>
-                    <td><a href="{:U('Nets/edit?id='.$vo['id'])}">{$vo.title}</a></td>
-                    <td>{$vo.url}</td>
-                    <td id="button{$vo.id}"   url="{$vo.url}"><a href="{:U($vo['routes'])}">开始</a></td>
-                    <td>{$vo.routes}</td>
-                    <td><span><?=date('Y-m-d',$vo['addtime'])?></span></td>
+                    <th class="text-center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.Crawl_Id}" /></th>
+                    <th>{$vo.Crawl_Id} </th>
+                    <td>{$vo.Crawl_Org}</td>
+                    <td>{$vo.Crawl_Url}</td>
+
                     <td>
-                        <!--<eq name="vo.status" value="1">-->
-                            <!--<a href="javascript:void(0);" onclick="recommend(this,'{$vo.id}','cancel')" u="{:U('recommend')}" style="color:red;">禁用</a>-->
-                        <!--</eq>-->
-                        <!--<eq name="vo.status" value="0">-->
-                            <!--<a href="javascript:void(0);" onclick="recommend(this,'{$vo.id}','add')" u="{:U('recommend')}">启用</a>-->
-                        <!--</eq>-->
-                        <a href="{:U('Nets/edit?id='.$vo['id'])}" >编辑</a>
-                        <a href="javascript:void(0);" class="confirm " onclick="delnets('{$vo.id}')">删除</a>
+                        <if condition="$vo.Web_Type eq a "> 立法动态
+                            <elseif condition="$vo.Web_Type eq b" /> 立法公示
+                            <elseif condition="$vo.Web_Type eq c" />新法速递
+                            <elseif condition="$vo.Web_Type eq d" />立法计划
+                            <else /> 其他
+                        </if>
+                    </td>
+
+                    <td><a class="start" href="javascript:void(0);"  onclick="start('{$vo.Crawl_Id}')">开始</a> </td>
+
+
+
+                    <td>
+                        <if condition="$vo.Crawl_Yes eq 0 "> 不能爬取
+                            <else /> 能爬取
+                        </if>
+                    </td>
+
+                    <td>{$vo.Crawl_Distric}</td>
+                    <td><span><?=date('Y-m-d',$vo['Crawl_DateTime'])?></span></td>
+                    <td>
+                        <a href="{:U('Nets/edit?Crawl_Id='.$vo['Crawl_Id'])}" >编辑</a>
+                        <a href="javascript:void(0);" class="confirm " onclick="delnets('{$vo.Crawl_Id}')">删除</a>
                     </td>
                 </tr>
+
             </volist>
             </tbody>
         </table>
-        
+
     </div>
 
     <!-- 分页 -->
@@ -122,6 +214,8 @@
                 window.location.reload();
             });
         }
+
+
         $(function(){
             //搜索功能
             $("#search").click(function(){

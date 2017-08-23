@@ -88,22 +88,28 @@
 
             
     <script type="text/javascript" src="/weixin/Public/static/uploadify/jquery.uploadify.min.js"></script>
-    <script type="text/javascript">
-        function check(){
-            if(document.frm.title.value == ""){
-                $("#title").siblings("span").text('*标题不能为空');
-                document.getElementById('title').focus();
-                return false;
-            }else if(document.frm.sub_title.value == ""){
-                $("#sub_title").siblings("span").text('*网址不能为空');
-                document.getElementById('sub_title').focus();
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-    </script>
+    <script src="/weixin/Public/static/jquery-1.11.3.min.js"></script>
+    <script src="/weixin/Public/static/Popt.js"></script>
+    <script src="/weixin/Public/static/cityJson.js"></script>
+    <script src="/weixin/Public/static/citySet.js"></script>
+    <style type="text/css">
+        /** { -ms-word-wrap: break-word; word-wrap: break-word; }
+        html { -webkit-text-size-adjust: none; text-size-adjust: none; }
+        html, body {height:100%;width:100%; }
+        html, body, h1, h2, h3, h4, h5, h6, div, ul, ol, li, dl, dt, dd, iframe, textarea, input, button, p, strong, b, i, a, span, del, pre, table, tr, th, td, form, fieldset, .pr, .pc { margin: 0; padding: 0; word-wrap: break-word; font-family: verdana,Microsoft YaHei,Tahoma,sans-serif; *font-family: Microsoft YaHei,verdana,Tahoma,sans-serif; }
+        body, ul, ol, li, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset, .pr, .pc, em, del { font-style: normal; font-size: 100%; }
+        ul, ol, dl { list-style: none; }*/
+        ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative; background-color:rgb(251,251,251);}
+        ._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+        ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #56b4f8; color: #fff !important; }
+        ._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+        ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+    </style>
+
     <div class="main-title cf">
         <h2>
             添加网址
@@ -116,8 +122,8 @@
         <input type="hidden" name="" id="url" value="<?php echo U('get_lng_lat');?>">
         <form id="form" action="<?php echo U('update');?>" name="frm" method="post" onsubmit="return check()" onreset="cancle()">
             <!-- 基础文档模型 -->
-            <input type="hidden" name="id" value="<?php echo ($res["id"]); ?>">
-            <div class="form-item cf">
+            <input type="hidden" name="Crawl_Id" value="<?php echo ($res["Crawl_Id"]); ?>">
+           <!-- <div class="form-item cf">
                 <label class="item-label">标题<span class="check-tips">（必填）</span></label>
                 <div class="controls">
                     <input type="text" class="text input-large" name="title" value="<?php echo ($res["title"]); ?>" id="title"><span style="color:red;"></span>
@@ -134,6 +140,50 @@
                     <input type="text" class="text input-large" name="route" id="route" value="<?php echo ($res["routes"]); ?>">
                     <span style="color:red;"></span>
                 </div>
+            </div>-->
+            <div class="form-item cf">
+                <label class="item-label">地区<span class="check-tips">（必填）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="Crawl_Distric" value="<?php echo ($res["Crawl_Distric"]); ?>" id="Crawl_Distric"><span style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-item cf">
+                <label class="item-label">组织/机构<span class="check-tips">（必填）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="Crawl_Org" id="Crawl_Org" value="<?php echo ($res["Crawl_Org"]); ?>"><span style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-item cf">
+                <label class="item-label">网址<span class="check-tips">（必填）</span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="Crawl_Url" id="Crawl_Url" value="<?php echo ($res["Crawl_Url"]); ?>"><span style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-item cf">
+                <label class="item-label">网页类型<span class="check-tips">（必填）</span></label>
+                <div class="controls">
+                    <!--<input type="" class="text input-large" name="Web_Type" id="Web_Type" value=""><span style="color:red;"></span>-->
+                    <select name="Web_Type" id="Web_Type" class="text input-large" style="height: auto"><span style="color:red;"></span>
+                        <option value="a">立法动态</option>
+                        <option value="b">立法公示</option>
+                        <option value="c">新法速递</option>
+                        <option value="d">立法计划</option>
+                        <option value="e">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-item cf">
+                <label class="item-label">能否爬取<span class="check-tips">（必选）</span></label>
+                <div class="controls">
+                    <input type="radio" name="Crawl_Yes" value="1" checked="checked" />能爬取
+                    <input type="radio" name="Crawl_Yes" value="0" />不能爬取
+                </div>
+            </div>
+            <div class="form-item cf">
+                <label class="item-label">题目标签格式（必填）<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="Crawl_Title" id="Crawl_Title" value="<?php echo ($res["Crawl_Title"]); ?>"><span style="color:red;"></span>
+                </div>
             </div>
             <br>
 
@@ -143,6 +193,33 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript">
+        $("#Crawl_Distric").click(function (e) {
+            SelCity(this,e);
+        });
+        function check(){
+            if(document.frm.Crawl_Distric.value == ""){
+                $("#Crawl_Distric").siblings("span").text('*地区不能为空');
+                document.getElementById('Crawl_Distric').focus();
+                return false;
+            }else if(document.frm.Crawl_Org.value == ""){
+                $("#Crawl_Org").siblings("span").text('*组织/机构不能为空');
+                document.getElementById('Crawl_Org').focus();
+                return false;
+            }else if(document.frm.Crawl_Url.value == ""){
+                $("#Crawl_Url").siblings("span").text('*网址不能为空');
+                document.getElementById('Crawl_Url').focus();
+                return false;
+            }else if(document.frm.Crawl_Title.value == ""){
+                $("#Crawl_Title").siblings("span").text('*标签个格式不能为空');
+                document.getElementById('Crawl_Title').focus();
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
 
         </div>
         <div class="cont-ft">
