@@ -103,6 +103,35 @@ a:hover{
     	text-indent:0em;
     }
 </style>
+ <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <script type="text/javascript">
+     $(function () {
+    	 var id=<?php echo ($_GET['id']); ?>;
+    	 var html="";
+    	 var url= "<?php echo U('Admin/Relation/selectrelation','','');?>/relationid/"+id+".html";
+    	 $.ajax({
+			 url:url,
+			 type: "get", 
+			
+			 success: function(data){
+			 
+    		 var arr = JSON.parse(data);
+    		 for(var i=0;i<arr.length;i++){
+    	    		var url="<?php echo U('Home/Index/detail','','');?>/id/"+arr[i].id+".html";;
+    	    		html+="<li><a href="+"'"+url+"'"+" style="+"'"+"margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;"+"'"+">"+arr[i].title+"</a>"
+    	    	}
+    		 $("ul").append(html);
+    		// alert(html);
+    	    }
+ 		    	
+
+    		 
+
+    	 	
+    	 })
+     })
+	</script>
 <div id="div1" class="box1">
 	<div class="content">
 	        <div style="text-align: center">
@@ -128,21 +157,7 @@ a:hover{
 	        	<span style="font-size: 0.8rem">相关新闻：</span>
 	        	<hr>
 		        	<ul>
-	       			<li>
-	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
-
-" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
-	       			</li>
-	       			<li>
-	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
-
-" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
-	       			</li>
-	       			<li>
-	       				<a href="http://www.cdrd.gov.cn/html/works/legislation/works/11857.shtml 
-
-" style="margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;">市人大常委会办公厅召开《成都市历史建筑和历史文化街区保护条例》新闻发布会</a>
-	       			</li>
+	       			
 	       		</ul>
 	       		<hr>
 	        </div>
@@ -157,6 +172,7 @@ a:hover{
 	        <a href="<?php echo U('Index/detail?id='.$res['next']);?>" style="margin-left:40%;text-decoration: none;color:black;">下一页</a>
 	    </div>
 	</div>
+	
 </div>
 </body>
 </html>
