@@ -107,6 +107,16 @@ a:hover{
     <script src="http://code.jquery.com/jquery-latest.js"></script>
      <script type="text/javascript">
      $(function () {
+    	 var parr = $("p")
+    		for(var i = 0;i<parr.length;i++){
+    			var str="";
+    			if(parr[i].children($("img"))){
+    				str = "<div class="+"'content-content'"+">"
+    				parr.prepend(str);
+    				parr.append("</div>")
+    			}         
+    		}
+    	         
     	 var id=<?php echo ($_GET['id']); ?>;
     	 var html="";
     	 var url= "<?php echo U('Admin/Relation/selectrelation','','');?>/relationid/"+id+".html";
