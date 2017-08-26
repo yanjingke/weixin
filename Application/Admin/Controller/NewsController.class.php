@@ -26,13 +26,18 @@ class NewsController extends AdminController
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
         $list = $Data->where('status = 1')->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+      
+        
         $show       = $Page->show();// 分页显示输出
         $tags = M('tags');
         foreach($list as &$v){
+        	file_put_contents(APP_PATH.'Admin/Controller/log.txt','-2-'.$v['ptime'],FILE_APPEND );//log
+        
             if($v['type'])
             {
                 $t = $tags->where('id = '.$v['type'])->find();
                 $v['typename'] = $t['name'];
+               
             }
         }
         $this->assign('page',$show);// 赋值分页输出

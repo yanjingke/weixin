@@ -111,10 +111,12 @@
         }
         function sendone(id)
         {
+        	
             var url = "<?php echo U('Home/Index/sendOne');?>";
             $("#sendone"+id).html('请稍后...').css('color','red');
             $.get(url,{id:id},function(data){
                 if(data == 'ok') {
+                
                     $("#sendone"+id).html('推送');
                 }
             });
@@ -312,6 +314,7 @@
     <script type="text/javascript" src="/weixin/Public/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script type="text/javascript">
         $(function(){
+           
             //搜索功能
             $("#search").click(function(){
                 var url = $(this).attr('url');
