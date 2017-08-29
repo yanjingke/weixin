@@ -31,8 +31,25 @@ class NewsController extends AdminController
         $show       = $Page->show();// 分页显示输出
         $tags = M('tags');
         foreach($list as &$v){
-        	file_put_contents(APP_PATH.'Admin/Controller/log.txt','-2-'.$v['ptime'],FILE_APPEND );//log
-        
+        	//
+        	$date=date('Y-m-d',strtotime($v['ptime']));
+        	$date2=date('Y-m-d',strtotime($v['addtime']));
+        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
+        		$v['ptime']='';
+        		file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+    		
+        	}
+        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
+        		$v['addtime']='';
+        		file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+    		
+        	}
+        	else{
+        	$v['ptime']=strtotime($date);
+        	$v['addtime']=strtotime($date2);
+        	}
+        	
+        	 
             if($v['type'])
             {
                 $t = $tags->where('id = '.$v['type'])->find();

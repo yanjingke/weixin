@@ -17,10 +17,10 @@ class PushHistoryController extends AdminController{
 		$res = M('historyj')->select();
 		  // $res =unserialize($res);
 		  $res=str_replace("\\", "",  urldecode(json_encode($res,JSON_UNESCAPED_UNICODE)));
-	      $res=str_replace("\";\"", "",$res);
+	     $res=str_replace("\";\"", "",$res);
 		  $res=preg_replace("/\"s:([0-9]+):\"/", "",$res);
 	     // $res=preg_replace("\s","",$res);
-		 //  $arr = urldecode(json_decode($res,true));
+		   $arr = urldecode(json_decode($res,true));
 		    //$res=  json_encode($res,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
      	 $this->ajaxReturn ($res,'JSON');
      	// echo  $res ;

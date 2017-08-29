@@ -205,7 +205,10 @@
 	    			url:url,
 	    			type: "get",    		
         	success: function(data){
+	            //alert(data);
         		var arr=JSON.parse(data);
+        		//alert(data+"ADSSAD");
+        		
         		for(var i=0;i<arr.length;i+=4){
     var html="<div class="+"'row'"+"style="+"'padding: 5px;'"+">"
     for(var j=0;j<4;j++){
