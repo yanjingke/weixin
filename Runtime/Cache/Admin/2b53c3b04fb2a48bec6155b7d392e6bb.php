@@ -17,13 +17,62 @@
     <!--<![endif]-->
     
 </head>
+<style>
+	body{
+		background-color: rgb(255,241,224);
+	}
+	.mylogo{
+		float: left;
+		width:200px;
+		height: 49px;
+		color: rgb(255,255,255);
+		font-size: 18px;
+		text-align: center;
+		background-color: rgb(255,255,255);
+		color: rgb(200,3,3);
+	}
+	.header{
+		background-color: rgb(200,3,3);
+	}
+	.main-nav .current a{
+		background-color:rgb(133,0,1)
+	}
+	.sidebar{
+		background: none;
+		background-color:rgb(216,76,41) ;
+		border-top:rgb(133,0,1) 1px solid;
+	}
+	.main-nav a:hover{
+		background-color: rgb(133,0,1);
+		
+	}
+	.data-table thead th{
+		background-color: rgb(216,76,41);
+	}
+	.btn{
+		background-color: rgb(200,3,3);
+		padding: 12px;
+	}
+	
+	.btn:hover{
+		background-color: rgb(133,0,1);
+	}
+	.main-nav li{
+		width: 90PX;
+	}
+	.data-table tbody td,.data-table tbody th{
+		border:solid 1px rgb(204,204,204);
+	}
+	
+</style>
 <body>
     <!-- 头部 -->
+    
     <div class="header">
         <!-- Logo -->
-        <span class="logo">
-             <img src="/weixin/Public/Admin/images/logo.jpg"/>
-        </span>
+        <div class="mylogo">
+        <b>地方性立法大数据中心</b>
+    	</div>
         <!-- /Logo -->
 
         <!-- 主导航 -->
@@ -87,6 +136,28 @@
             
 
             
+    <script type="text/javascript" src="/weixin/Public/static/uploadify/jquery.uploadify.min.js"></script>
+    <script src="/weixin/Public/static/jquery-1.11.3.min.js"></script>
+    <script src="/weixin/Public/static/Popt.js"></script>
+    <script src="/weixin/Public/static/cityJson.js"></script>
+    <script src="/weixin/Public/static/citySet.js"></script>
+    <style type="text/css">
+        /** { -ms-word-wrap: break-word; word-wrap: break-word; }
+        html { -webkit-text-size-adjust: none; text-size-adjust: none; }
+        html, body {height:100%;width:100%; }
+        html, body, h1, h2, h3, h4, h5, h6, div, ul, ol, li, dl, dt, dd, iframe, textarea, input, button, p, strong, b, i, a, span, del, pre, table, tr, th, td, form, fieldset, .pr, .pc { margin: 0; padding: 0; word-wrap: break-word; font-family: verdana,Microsoft YaHei,Tahoma,sans-serif; *font-family: Microsoft YaHei,verdana,Tahoma,sans-serif; }
+        body, ul, ol, li, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset, .pr, .pc, em, del { font-style: normal; font-size: 100%; }
+        ul, ol, dl { list-style: none; }*/
+        ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative; background-color:rgb(251,251,251);}
+        ._citys span { color: #56b4f8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #56b4f8; cursor: pointer; }
+        ._citys0 { width: 100%; height: 34px; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; }
+        ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
+        .citySel { background-color: #56b4f8; color: #fff !important; }
+        ._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+        ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+        ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+        .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
+    </style>
     <!-- 标题 -->
     <div class="main-title">
         <h2>
@@ -94,7 +165,6 @@
         </h2>
     </div>
     <script>
-
 
 
 
@@ -175,7 +245,7 @@
             });
         }
 
-            function getall(){
+            function getsome(){
                 $("#getsome").click(function(){
                     $(this).html("<b style='color: #ab2412'>正在爬取</b>");
                     $(this).removeAttr('onclick');//去掉a标签中的onclick事件
@@ -195,6 +265,7 @@
 
         }
 
+
     </script>
     <!-- 按钮工具栏 -->
     <div class="cf">
@@ -202,6 +273,19 @@
             <a class="btn " href="<?php echo U('add');?>">快速添加</a>
             <a id="getall" class="btn " href="javascript:void(0);" onclick="getall()">全部采集</a>
             <a id="getsome" class="btn " href="javascript:void(0);" onclick="getsome()">采集选中</a>
+
+            <form id="form" action="<?php echo U('index');?>" name="frm" method="post" onsubmit="return check()" onreset="cancle()">
+            <div class="form-item cf">
+                <label class="item-label">地区<span class="check-tips"></span></label>
+                <div class="controls">
+                    <input type="text" class="text input-large" name="Crawl_Distric" value="<?php echo ($res["Crawl_Distric"]); ?>" id="Crawl_Distric"><span style="color:red;"></span>
+                </div>
+                <div class="form-item ">
+                    <input type="submit" value="确定" class="btn submit-btn">
+                    <input type="reset" value="取消" class="btn submit-btn">
+                </div>
+            </div>
+            </form>
         </div>
 
         <!-- 高级搜索 -->
@@ -375,6 +459,9 @@
     <script type="text/javascript" src="/weixin/Public/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/weixin/Public/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script type="text/javascript">
+        $("#Crawl_Distric").click(function (e) {
+            SelCity(this,e);
+        });
         function recommend(obj,a){
             var url = $(obj).attr('u');
 

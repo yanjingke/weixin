@@ -15,7 +15,6 @@
     color: #4A4A4A ;
     text-align: center; 
 }
-
 .box1{
     width: 300px;
     margin: 20px;
@@ -28,7 +27,6 @@
     -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset;
     -webkit-border-bottom-right-radius: 6px 50px;    
 }
-
 .box1:before{
     content: '';
     width: 50px;
@@ -41,7 +39,6 @@
                         skew(0deg,30deg)
                         rotate(-25deg);
 }
-
 .box1:after{
     content: '';
     width: 100px;
@@ -55,34 +52,28 @@
                         translate(20px,25px)
                         skew(20deg);
 }
-
 .box1 img {
     width: 100%;
     margin-top: 15px;
 }
-
 p{ 
     margin-top: 15px;
     text-align: justify;
 }
-
 h1{
     font-size: 20px;
     font-weight: bold;
     margin-top: 5px; 
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
-
 a{
     text-decoration: none;
     color: #4A4A4A !important;
 }
-
 a:hover{
     text-decoration: underline;
     color: #6B6B6B !important ;
 }
-
 a:hover{
     text-decoration: underline;
     color: #6B6B6B !important ;
@@ -103,45 +94,50 @@ a:hover{
     	text-indent:0em;
     }
 </style>
- <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-     <script type="text/javascript">
-     $(function () {
-    	 var parr = $("p")
-    		for(var i = 0;i<parr.length;i++){
-    			var str="";
-    			if(parr[i].children($("img"))){
-    				str = "<div class="+"'content-content'"+">"
-    				parr.prepend(str);
-    				parr.append("</div>")
-    			}         
-    		}
-    	         
-    	 var id={$_GET['id']};
-    	 var html="";
-    	 var url= "{:U('Admin/Relation/selectrelation','','')}/relationid/"+id+".html";
-    	 $.ajax({
+ <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+<script>
+    $(function () {
+    	var html=""
+    var id={$_GET['id']};
+     var url= "{:U('Admin/Relation/selectrelation','','')}/relationid/"+id+".html";
+		 //alert(url); 
+   	 $.ajax({
 			 url:url,
 			 type: "get", 
 			
 			 success: function(data){
-			 
-    		 var arr = JSON.parse(data);
-    		 for(var i=0;i<arr.length;i++){
-    	    		var url="{:U('Home/Index/detail','','')}/id/"+arr[i].id+".html";;
-    	    		html+="<li><a href="+"'"+url+"'"+" style="+"'"+"margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;"+"'"+">"+arr[i].title+"</a>"
-    	    	}
-    		 $("ul").append(html);
-    		// alert(html);
-    	    }
- 		    	
 
-    		 
+   		 var arr = JSON.parse(data);
+   		
+   		for(var i=0;i<arr.length;i++){
+   			
+    		var urlh=arr[i].id;
+    		//alert(urlh);
+    		html+="<li><a href="+"'"+urlh+"'"+" style="+"'"+"margin-left: 1%;text-decoration: none;font-size: 0.8rem;color:black;font-weight: bold;"+"'"+">"+arr[i].title+"</a></li>"
+    	}
+    
+    $("#ul").append(html);
+	
+	var parr = $("#box1").find("p");
+	//alert(parr)
+	for(var i = 0;i<parr.length;i++){
+		var str="";
+			str = "<div class="+"'content-content'"+">"
+			parr.prepend(str);
+			parr.append("</div>")
+	}
+		    	
 
-    	 	
-    	 })
-     })
-	</script>
+   	 } 
+
+   	 	
+   	 })
+    	
+  })
+</script>
+ 
 <div id="div1" class="box1">
 	<div class="content">
 	        <div style="text-align: center">
@@ -151,7 +147,7 @@ a:hover{
 	        </div>
 	        <div>
 	            <span style="font-size: 0.8rem;margin-left: 5%;color:darkred">{$res.source}</span>
-	            <span style="margin-left: 40%;font-size: 0.8rem;color:darkred" ><?=date('Y-m-d',$res['ptime'])?></span>
+	            <span style="margin-left: 40%;font-size: 0.8rem;color:darkred" >{$res['ptime']}</span>
 	        </div>
 	    <hr>
 	    <div class="content-content">
@@ -166,9 +162,9 @@ a:hover{
 	        <div>
 	        	<span style="font-size: 0.8rem">相关新闻：</span>
 	        	<hr>
-		        	<ul>
-	       			
-	       		</ul>
+		        <ul id="ul">
+       			
+       		</ul>	
 	       		<hr>
 	        </div>
 	       <div>

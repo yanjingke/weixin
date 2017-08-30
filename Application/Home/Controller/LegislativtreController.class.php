@@ -12,7 +12,7 @@ class LegislativtreController extends WeixinController {
     	$Data =M("news"); // 实例化Data数据对象
         import('ORG.Util.Page');// 导入分页类
         //$count      = $Data->where($map)->count();// 查询满足要求的总记录数 $map表示查询条件
-        $count      = $Data->where('status = 1')->count();// 查询满足要求的总记录数
+        $count      = $Data->where("tags = '动态'")->count();// 查询满足要求的总记录数
         $Page       = new Page($count,15);// 实例化分页类 传入总记录数
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
@@ -24,6 +24,23 @@ class LegislativtreController extends WeixinController {
         $tags = M('tags');
         foreach($list as &$v){
         	//
+        	//$v['clean_content']=strpos($v['clean_content'],0,50);
+        	if($v['img_url']!=null && trim($v['img_url'])!='[]'){
+        		$pic = $v['img_url'];
+        	$pic=str_replace('[','',$pic);
+			$pic=str_replace(']','',$pic);
+			$pic=str_replace('u','',$pic);
+			$pic=str_replace('\'','',$pic);
+			
+			$pic=  substr($pic,0,strpos($pic, ','));
+			
+			$v['img_url']=$pic;
+			
+			
+        	}
+        	else{
+      		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
+        	}
         	$date=date('Y-m-d',strtotime($v['ptime']));
         	$date2=date('Y-m-d',strtotime($v['addtime']));
         	if($date==date('Y-m-d',strtotime('1970-01-01'))){
@@ -37,8 +54,8 @@ class LegislativtreController extends WeixinController {
     		
         	}
         	else{
-        	$v['ptime']=strtotime($date);
-        	$v['addtime']=strtotime($date2);
+        	$v['ptime']=$date;
+        	$v['addtime']=$date2;
         	}
         	
         	 
@@ -70,7 +87,7 @@ class LegislativtreController extends WeixinController {
     	$Data =M("news"); // 实例化Data数据对象
         import('ORG.Util.Page');// 导入分页类
         //$count      = $Data->where($map)->count();// 查询满足要求的总记录数 $map表示查询条件
-        $count      = $Data->where('status = 1')->count();// 查询满足要求的总记录数
+        $count      = $Data->where("tags = '计划'")->count();// 查询满足要求的总记录数
         $Page       = new Page($count,15);// 实例化分页类 传入总记录数
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
@@ -80,8 +97,25 @@ class LegislativtreController extends WeixinController {
         
         $show       = $Page->show();// 分页显示输出
         $tags = M('tags');
-        foreach($list as &$v){
+      foreach($list as &$v){
         	//
+        	//$v['clean_content']=strpos($v['clean_content'],0,50);
+        	if($v['img_url']!=null && trim($v['img_url'])!='[]'){
+        		$pic = $v['img_url'];
+        	$pic=str_replace('[','',$pic);
+			$pic=str_replace(']','',$pic);
+			$pic=str_replace('u','',$pic);
+			$pic=str_replace('\'','',$pic);
+			
+			$pic=  substr($pic,0,strpos($pic, ','));
+			
+			$v['img_url']=$pic;
+			
+			
+        	}
+        	else{
+      		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
+        	}
         	$date=date('Y-m-d',strtotime($v['ptime']));
         	$date2=date('Y-m-d',strtotime($v['addtime']));
         	if($date==date('Y-m-d',strtotime('1970-01-01'))){
@@ -95,8 +129,8 @@ class LegislativtreController extends WeixinController {
     		
         	}
         	else{
-        	$v['ptime']=strtotime($date);
-        	$v['addtime']=strtotime($date2);
+        	$v['ptime']=$date;
+        	$v['addtime']=$date2;
         	}
         	
         	 
@@ -110,23 +144,40 @@ class LegislativtreController extends WeixinController {
      
         $this->ajaxReturn ($list,'JSON');
     }	
-    //审立
-    public function  standList(){
+    //公示
+    public function  publicityList(){
     	$Data =M("news"); // 实例化Data数据对象
         import('ORG.Util.Page');// 导入分页类
         //$count      = $Data->where($map)->count();// 查询满足要求的总记录数 $map表示查询条件
-        $count      = $Data->where('status = 1')->count();// 查询满足要求的总记录数
+        $count      = $Data->where("tags = '公示'")->count();// 查询满足要求的总记录数
         $Page       = new Page($count,15);// 实例化分页类 传入总记录数
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '审立'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '公示'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
       
         
         $show       = $Page->show();// 分页显示输出
         $tags = M('tags');
-        foreach($list as &$v){
+      foreach($list as &$v){
         	//
+        	//$v['clean_content']=strpos($v['clean_content'],0,50);
+        	if($v['img_url']!=null && trim($v['img_url'])!='[]'){
+        		$pic = $v['img_url'];
+        	$pic=str_replace('[','',$pic);
+			$pic=str_replace(']','',$pic);
+			$pic=str_replace('u','',$pic);
+			$pic=str_replace('\'','',$pic);
+			
+			$pic=  substr($pic,0,strpos($pic, ','));
+			
+			$v['img_url']=$pic;
+			
+			
+        	}
+        	else{
+      		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
+        	}
         	$date=date('Y-m-d',strtotime($v['ptime']));
         	$date2=date('Y-m-d',strtotime($v['addtime']));
         	if($date==date('Y-m-d',strtotime('1970-01-01'))){
@@ -140,8 +191,8 @@ class LegislativtreController extends WeixinController {
     		
         	}
         	else{
-        	$v['ptime']=strtotime($date);
-        	$v['addtime']=strtotime($date2);
+        	$v['ptime']=$date;
+        	$v['addtime']=$date2;
         	}
         	
         	 
@@ -152,26 +203,42 @@ class LegislativtreController extends WeixinController {
                
             }
         }
-     
         $this->ajaxReturn ($list,'JSON');
     }	
-	//公告
-    public function  noticeList(){
+	//新法
+    public function  newlawList(){
     	$Data =M("news"); // 实例化Data数据对象
         import('ORG.Util.Page');// 导入分页类
         //$count      = $Data->where($map)->count();// 查询满足要求的总记录数 $map表示查询条件
-        $count      = $Data->where('status = 1')->count();// 查询满足要求的总记录数
+        $count      = $Data->where("tags = '新法'")->count();// 查询满足要求的总记录数
         $Page       = new Page($count,15);// 实例化分页类 传入总记录数
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '公告'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '新法'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
       
         
         $show       = $Page->show();// 分页显示输出
         $tags = M('tags');
-        foreach($list as &$v){
+      foreach($list as &$v){
         	//
+        	//$v['clean_content']=strpos($v['clean_content'],0,50);
+        	if($v['img_url']!=null && trim($v['img_url'])!='[]'){
+        		$pic = $v['img_url'];
+        	$pic=str_replace('[','',$pic);
+			$pic=str_replace(']','',$pic);
+			$pic=str_replace('u','',$pic);
+			$pic=str_replace('\'','',$pic);
+			
+			$pic=  substr($pic,0,strpos($pic, ','));
+			
+			$v['img_url']=$pic;
+			
+			
+        	}
+        	else{
+      		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
+        	}
         	$date=date('Y-m-d',strtotime($v['ptime']));
         	$date2=date('Y-m-d',strtotime($v['addtime']));
         	if($date==date('Y-m-d',strtotime('1970-01-01'))){
@@ -185,8 +252,8 @@ class LegislativtreController extends WeixinController {
     		
         	}
         	else{
-        	$v['ptime']=strtotime($date);
-        	$v['addtime']=strtotime($date2);
+        	$v['ptime']=$date;
+        	$v['addtime']=$date2;
         	}
         	
         	 

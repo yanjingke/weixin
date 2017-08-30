@@ -17,6 +17,10 @@ class NetsController extends AdminController
     public function index()
     {
         $Data =M("nets2"); // 实例化Data数据对象
+        $Crawl_Distric = I('post.Crawl_Distric');
+        if($Crawl_Distric){
+            $map['Crawl_Distric'] = $Crawl_Distric ;
+        }
 
         import('ORG.Util.Page');// 导入分页类
         //$count      = $Data->where($map)->count();// 查询满足要求的总记录数 $map表示查询条件
@@ -25,7 +29,12 @@ class NetsController extends AdminController
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where('Crawl_status = 1')->order('Crawl_Id desc')->page($nowPage.','.$Page->listRows)->select();
+        if($Crawl_Distric)
+        {
+            $list = $Data->where($map)->order('Crawl_Id desc')->page($nowPage.','.$Page->listRows)->select();
+        }else{
+            $list = $Data->where('Crawl_status = 1')->order('Crawl_Id desc')->page($nowPage.','.$Page->listRows)->select();
+        }
         $show       = $Page->show();// 分页显示输出
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('list',$list);// 赋值数据集

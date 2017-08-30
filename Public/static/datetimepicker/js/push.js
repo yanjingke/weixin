@@ -27,7 +27,8 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
-					html += '<li class="item-content">'+content.title+'</li>';
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -54,7 +55,8 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
-					html += '<li class="item-content">'+content.title+'</li>';
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -70,7 +72,7 @@
  function addItemstab3(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 //生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/standList";
+	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/publicityList";
 	  var b=lastIndex;
 	  if(b!=d){
 	    $.ajax({
@@ -81,7 +83,8 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
-					html += '<li class="item-content">'+content.title+'</li>';
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -97,7 +100,7 @@
  function addItemstab4(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 //生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/standList";
+	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/newlawList";
 	  var b=lastIndex;
 	  if(b!=e){
 	    $.ajax({
@@ -108,7 +111,8 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
-					html += '<li class="item-content">'+content.title+'</li>';
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -136,7 +140,8 @@ $('.infinite-scroll.active .list-container').append(html);
 	 var html = '';
 	 $.each(data, function(index, content)
 	 		  { 
-	 	html += '<li class="item-content">'+content.title+'</li>';
+		 //alert(content.img_url);
+	 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 	 		  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 	 		  });
 
@@ -289,15 +294,15 @@ $('.infinite-scroll.active .list-container').append(html);
         }
        
         lastInde2=lastInde2+1;
-        var  plancountone=0;
-        if( plancount%15==0){
-        	plancountone=plancount/15;
+        var  standcountone=0;
+        if( standcount%15==0){
+        	standcountone=standcount/15;
         }
-        if( plancount%15!=0){
-        	plancountone= parseInt(plancount/15)+1;
+        if( standcount%15!=0){
+        	standcountone= parseInt(standcount/15)+1;
         }
         //alert(lastInde2+"　"+plancountone);
-        if(lastInde2>=plancountone ){
+        if(lastInde2>=standcountone ){
       	   $('#tab3 .infinite-scroll-preloader').eq(tabIndex).hide();
                //return
         }
@@ -329,15 +334,15 @@ $('.infinite-scroll.active .list-container').append(html);
         }
        
         lastInde2=lastInde2+1;
-        var  plancountone=0;
-        if( plancount%15==0){
-        	plancountone=plancount/15;
+        var  noticecountone=0;
+        if( noticecount%15==0){
+        	noticecountone=noticecount/15;
         }
-        if( plancount%15!=0){
-        	plancountone= parseInt(plancount/15)+1;
+        if( noticecount%15!=0){
+        	plancountone= parseInt(noticecount/15)+1;
         }
         //alert(lastInde2+"　"+plancountone);
-        if(lastInde2>=plancountone ){
+        if(lastInde2>=noticecountone ){
       	   $('#tab4 .infinite-scroll-preloader').eq(tabIndex).hide();
                //return
         }

@@ -17,13 +17,62 @@
     <!--<![endif]-->
     
 </head>
+<style>
+	body{
+		background-color: rgb(255,241,224);
+	}
+	.mylogo{
+		float: left;
+		width:200px;
+		height: 49px;
+		color: rgb(255,255,255);
+		font-size: 18px;
+		text-align: center;
+		background-color: rgb(255,255,255);
+		color: rgb(200,3,3);
+	}
+	.header{
+		background-color: rgb(200,3,3);
+	}
+	.main-nav .current a{
+		background-color:rgb(133,0,1)
+	}
+	.sidebar{
+		background: none;
+		background-color:rgb(216,76,41) ;
+		border-top:rgb(133,0,1) 1px solid;
+	}
+	.main-nav a:hover{
+		background-color: rgb(133,0,1);
+		
+	}
+	.data-table thead th{
+		background-color: rgb(216,76,41);
+	}
+	.btn{
+		background-color: rgb(200,3,3);
+		padding: 12px;
+	}
+	
+	.btn:hover{
+		background-color: rgb(133,0,1);
+	}
+	.main-nav li{
+		width: 90PX;
+	}
+	.data-table tbody td,.data-table tbody th{
+		border:solid 1px rgb(204,204,204);
+	}
+	
+</style>
 <body>
     <!-- 头部 -->
+    
     <div class="header">
         <!-- Logo -->
-        <span class="logo">
-             <img src="/weixin/Public/Admin/images/logo.jpg"/>
-        </span>
+        <div class="mylogo">
+        <b>地方性立法大数据中心</b>
+    	</div>
         <!-- /Logo -->
 
         <!-- 主导航 -->
@@ -172,10 +221,10 @@
                 <th class="" width="10%">发布时间</th>
                 <th class="" width="10%">采集时间</th>
                 <th class="" width="10%">标签</th>
-                <th class="" width="10%">主题词</th>
+                <th class="" width="8%">主题内容</th>
                 <th class="" width="5%">来源</th>
                 <th class="" width="5%">推送</th>
-                <th class="" width="5%">推送次数</th>
+                <th class="" width="7%">推送次数</th>
                 <th class="" width="10%">操作</th>
             </tr>
             </thead>

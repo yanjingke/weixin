@@ -115,7 +115,7 @@ class WeixinController extends HomeController
 					//                    }else{
 					//                        $content = "小编正在努力策划ing.....";
 					//                    }
-					$content = '1111';
+					$content = '本功能还在调试阶段';
 					$template = "<xml>
 					 				<ToUserName><![CDATA[%s]]></ToUserName>
 					 				<FromUserName><![CDATA[%s]]></FromUserName>
@@ -766,8 +766,10 @@ class WeixinController extends HomeController
 						
 				}
 				$pic =$pic;
-
-				$url = "http://test.fixstyle.cn/Home/Index/detail/id/".$id.".html";
+				$url=U('Index/detail');
+				$url = "http://yanjingke.w3.luyouxia.net/".$url."/".$id.".html";
+			
+				//$url = "http://test.fixstyle.cn/Home/Index/detail/id/".$id.".html";
 				$token = $this->getLocalToken();//测试
 				//                 $model = M('pushhistory');
 				//            	 $data = array('id'=>$id,'endtime'=>time(),'title'=>$title,'content'=> $content);
@@ -815,10 +817,13 @@ class WeixinController extends HomeController
 			$title = $v1['title'];
 			$content = $v1['content'];
 			$id =$v1['id'];
-			$url = "http://test.fixstyle.cn/Home/Index/detail/id/".$id.".html";
-			$pic = $v1['img_url'];
-			file_put_contents(APP_PATH.'Home/Controller/log.txt','-res-:'. $pic .'---',FILE_APPEND );
+			$url=U('Index/detail');
+			
+			$url = "http://yanjingke.w3.luyouxia.net/".$url."/".$id.".html";
+			//file_put_contents(APP_PATH.'Home/Controller/log.txt',$url .'---',FILE_APPEND );
 		
+			$pic = $v1['img_url'];
+			
 			$pic=str_replace('[','',$pic);
 			$pic=str_replace(']','',$pic);
 			$pic=str_replace('u','',$pic);
@@ -866,15 +871,60 @@ class WeixinController extends HomeController
 			
 		 
 	}
-	public function test(){
-		// S('data',123);
-
-		//echo $redis->get("test");
-		echo S('access_token');
-	}
+//	public function test(){
+//		// S('data',123);
+//
+//		//echo $redis->get("test");
+//		echo S('access_token');
+//	}
 	function getUUid() {
 		return  date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
 	}
-
+	function createmenu(){
+			$url=U('Index/Legislativtre');
+			
+		$arrsubsearch=array(array(
+		  "type"=>urlencode("view"), 
+		  "url"=>urlencode("http://m.hao123.com/a/tianqi"),
+		  "name"=>urlencode("主题搜索"), 
+		  
+		),
+		array(
+		  "type"=>urlencode("view"), 
+		  "url"=>urlencode("http://m.hao123.com/a/tianqi"),
+		  "name"=>urlencode("订阅推送"), 
+		  
+		)
+		);
+		$arr=array(
+		
+		'button'=>array(array(
+		  "type"=>urlencode("view"),
+          "name"=>urlencode("走进立法"),
+		  "url"=>urlencode("http://yanjingke.w3.luyouxia.net/".$url)
+         	
+		),
+		array(
+		  "name"=>urlencode("立法订阅"),
+       	  "sub_button"=>$arrsubsearch
+         	
+		),
+		array(
+		  "type"=>urlencode("click"),
+		  "name"=>urlencode("立法服务"),
+       	  "key"=>urlencode("V1001_TODAY_servrce")
+         	
+		)
+		
+		));
+		
+		$template = urldecode(json_encode($arr));
+		$token = $this->getLocalToken();//测试
+		$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
+		$res = $this->https_request($url,$template);
+		//file_put_contents(APP_PATH.'Home/Controller/log.txt','-res-:'. $res  .'---',FILE_APPEND );
+		
+		
+	}
 
 }
