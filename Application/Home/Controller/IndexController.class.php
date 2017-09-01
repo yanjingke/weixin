@@ -69,7 +69,8 @@ class IndexController extends WeixinController {
      */
     public function order()
     {
-        $uid = $_SESSION['uid'];
+        //$uid = $_SESSION['uid'];
+           $uid = 19;
         $model = M('tags');
         $res = $model -> select();
         foreach($res as &$v)
@@ -262,7 +263,7 @@ class IndexController extends WeixinController {
                 $start = strtotime(I('post.s'));
                 $end = strtotime(I('post.e'));
             }
-
+			
             $all = $model->query("select * from wx_news where( status = 1 and  ptime > $start and ptime < $end ) order by ptime desc ");
         }
         elseif($type == 'area')
@@ -270,13 +271,16 @@ class IndexController extends WeixinController {
             $area = I('post.area');
             $arr = explode(' ',$area);
             $str = str_replace('市','',$arr[1]);
-            $all = $model->where(" area = '$str' ")->select();
+         	$where['area'] = array('like',"%$str%");
+            $all = $model->where($where)->select();
         }
         elseif($type == 'words')
         {
             $words = I('post.words');
             $map['title'] = array('like',"%$words%");
-            $all = $model->where($map)->select();
+             $all = $model->where($map)->select();
+            file_put_contents(APP_PATH.'Home/Controller/log.txt',  $all."是发送到发送到   ",FILE_APPEND );
+           
         }
         if($all)
         {

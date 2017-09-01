@@ -649,11 +649,10 @@ class WeixinController extends HomeController
                'picurl'=>urlencode($pic)
 		));
 		$data = array(
-           'touser'=>$openid,
+           'touser'=>urlencode($openid),
            'msgtype'=>'news',
            'news'=>array(
-    	 'articles'=>
-		$arr
+    	 'articles'=>$arr
 		 
 		)
 		//UL4r7reKvqewLxORv-3JikoucGQIePS_ZCs70NxKduyNR2gXLqHK4F06frFkmZzMQsUU_z4ndEdsfDgkIhFLxaOdCMIPoqr6rLMATra0z7Sc3KButH5O2WZuekK9UdYzWRUdAIAJEH
@@ -666,8 +665,8 @@ class WeixinController extends HomeController
 			$uid=$this->getUUid();
 			$time=time();
 			$time= date("Y-m-d H:i:s",$time);
-			$data = array('uid'=>$uid,'time'=> $time,'historyjson'=>$new,'juimage'=>0);
-			$res = $model->add($data);
+			$data1= array('uid'=>$uid,'time'=> $time,'historyjson'=>$new,'juimage'=>0);
+			$res = $model->add($data1);
 		}
 		$template = urldecode(json_encode($data));
 		$url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$token;
@@ -859,15 +858,15 @@ class WeixinController extends HomeController
 			$uid=$this->getUUid();
 			$time=time();
 			$time= date("Y-m-d H:i:s",$time);
-			$data = array('uid'=>$uid,'time'=> $time,'historyjson'=>$new,'juimage'=>1);
-			$res = $model->add($data);
+			$data1 = array('uid'=>$uid,'time'=> $time,'historyjson'=>$new,'juimage'=>1);
+			$res = $model->add($data1);
 		}
 		 
 		$template = urldecode(json_encode($data));
 		$url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$token;
 		$res = $this->https_request($url,$template);
 		// $this->arrayToXml($data);
-		file_put_contents(APP_PATH.'Home/Controller/log.txt','-res-:'. $template .'---',FILE_APPEND );
+		//file_put_contents(APP_PATH.'Home/Controller/log.txt','-res-:'. $template .'---',FILE_APPEND );
 			
 		 
 	}

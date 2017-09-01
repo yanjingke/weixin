@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿	$(function () {
   'use strict';
 
  function addItems(number, lastIndex) {
@@ -27,6 +27,10 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
+//					/alert(content.ptime+" sada1");
+					if(content.ptime==false){
+						content.ptime="";
+					}
 				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
@@ -55,6 +59,9 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
+					if(content.ptime==false){
+						content.ptime="";
+					}
 					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
@@ -83,6 +90,9 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
+					if(content.ptime==false){
+						content.ptime="";
+					}
 					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
@@ -111,6 +121,9 @@
 				var html = '';
 				$.each(data, function(index, content)
 						  { 
+					if(content.ptime==false){
+						content.ptime="";
+					}
 				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
@@ -140,6 +153,9 @@ $('.infinite-scroll.active .list-container').append(html);
 	 var html = '';
 	 $.each(data, function(index, content)
 	 		  { 
+		 if(content.ptime==false){
+				content.ptime="";
+			}
 		 //alert(content.img_url);
 	 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 	 		  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 

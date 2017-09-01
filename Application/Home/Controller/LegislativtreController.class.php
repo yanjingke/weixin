@@ -17,7 +17,7 @@ class LegislativtreController extends WeixinController {
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '动态'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '动态'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->Field('addtime','title','img_url','id','ptime','clean_content')->select();
       
         
         $show       = $Page->show();// 分页显示输出
@@ -41,15 +41,15 @@ class LegislativtreController extends WeixinController {
         	else{
       		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
         	}
-        	$date=date('Y-m-d',strtotime($v['ptime']));
-        	$date2=date('Y-m-d',strtotime($v['addtime']));
-        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
+        	$date=date('Y年m月d',$v['ptime']);
+        	$date2=date('Y年m月d',$v['addtime']);
+        	if($date==false){
         		$v['ptime']='';
-        		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+   			   // file_put_contents(APP_PATH.'Home/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
-        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['addtime']='';
+        	if($date2==false){
+        		$v['addtime']='adsda';
         		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
@@ -92,7 +92,7 @@ class LegislativtreController extends WeixinController {
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '计划'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '计划'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->Field('addtime','title','img_url','id','ptime','clean_content')->select();
       
         
         $show       = $Page->show();// 分页显示输出
@@ -113,18 +113,18 @@ class LegislativtreController extends WeixinController {
 			
 			
         	}
-        	else{
+     		else{
       		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
         	}
-        	$date=date('Y-m-d',strtotime($v['ptime']));
-        	$date2=date('Y-m-d',strtotime($v['addtime']));
-        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
+        	$date=date('Y年m月d',$v['ptime']);
+        	$date2=date('Y年m月d',$v['addtime']);
+        	if($date==false){
         		$v['ptime']='';
-        		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+   			   // file_put_contents(APP_PATH.'Home/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
-        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['addtime']='';
+        	if($date2==false){
+        		$v['addtime']='adsda';
         		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
@@ -154,7 +154,7 @@ class LegislativtreController extends WeixinController {
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '公示'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '公示'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->Field('addtime','title','img_url','id','ptime','clean_content')->select();
       
         
         $show       = $Page->show();// 分页显示输出
@@ -175,18 +175,18 @@ class LegislativtreController extends WeixinController {
 			
 			
         	}
-        	else{
+     		 else{
       		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
         	}
-        	$date=date('Y-m-d',strtotime($v['ptime']));
-        	$date2=date('Y-m-d',strtotime($v['addtime']));
-        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
+        	$date=date('Y年m月d',$v['ptime']);
+        	$date2=date('Y年m月d',$v['addtime']);
+        	if($date==false){
         		$v['ptime']='';
-        		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+   			   // file_put_contents(APP_PATH.'Home/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
-        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['addtime']='';
+        	if($date2==false){
+        		$v['addtime']='adsda';
         		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
@@ -215,7 +215,7 @@ class LegislativtreController extends WeixinController {
         // 进行分页数据查询 注意page方法的参数的前面部分是当前的页数使用 $_GET[p]获取
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         //$list = $Data->where($map)->order('create_time')->page($nowPage.','.$Page->listRows)->select();
-        $list = $Data->where("tags = '新法'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->select();
+        $list = $Data->where("tags = '新法'")->order('ptime desc')->page($nowPage.','.$Page->listRows)->Field('addtime','title','img_url','id','ptime','clean_content')->select();
       
         
         $show       = $Page->show();// 分页显示输出
@@ -236,26 +236,26 @@ class LegislativtreController extends WeixinController {
 			
 			
         	}
-        	else{
+      else{
       		$v['img_url']="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg";
         	}
-        	$date=date('Y-m-d',strtotime($v['ptime']));
-        	$date2=date('Y-m-d',strtotime($v['addtime']));
-        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
+        	$date=date('Y年m月d',$v['ptime']);
+        	$date2=date('Y年m月d',$v['addtime']);
+        	if($date==false){
         		$v['ptime']='';
-        		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+   			   // file_put_contents(APP_PATH.'Home/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
     		
         	}
-        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['addtime']='';
-        		//file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
-    		
+        	if($date2==false){
+        		$v['addtime']='adsda';
+        		
         	}
         	else{
         	$v['ptime']=$date;
         	$v['addtime']=$date2;
         	}
-        	
+        	file_put_contents(APP_PATH.'Home/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
+    		
         	 
             if($v['type'])
             {

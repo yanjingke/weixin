@@ -32,22 +32,7 @@ class NewsController extends AdminController
         $tags = M('tags');
         foreach($list as &$v){
         	//
-        	$date=date('Y-m-d',strtotime($v['ptime']));
-        	$date2=date('Y-m-d',strtotime($v['addtime']));
-        	if($date==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['ptime']='';
-        		file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
-    		
-        	}
-        	if($date2==date('Y-m-d',strtotime('1970-01-01'))){
-        		$v['addtime']='';
-        		file_put_contents(APP_PATH.'Admin/Controller/log.txt',$v['ptime'].'sadas',FILE_APPEND );
-    		
-        	}
-        	else{
-        	$v['ptime']=strtotime($date);
-        	$v['addtime']=strtotime($date2);
-        	}
+        
         	
         	 
             if($v['type'])

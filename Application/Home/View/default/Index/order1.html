@@ -61,20 +61,11 @@
             </notempty>
             <li> <span><img src="__IMG__/order.png" alt="" style="width:30px;height:30px;"></span><input type="text" class="tags" placeholder="请输入关键词" u="{:U('getType')}"/> <a href="javascript:;" onclick="order('{$v.id}','order')"></a></li>
 
-		<li> <span><img src="__IMG__/order.png" alt="" style="width:30px;height:30px;"></span><input type="text" class="tags weui-input" placeholder="请输入关键词" u="{:U('getType')}"/ id="home-city"> <a href="javascript:;" onclick="order('{$v.id}','order')"></a></li>
 
         </ul>
 
 </div>
 </div>
-<script>
-$("#home-city").cityPicker({
-    title: "选择目的地",
-    showDistrict: false,
-    onChange: function (picker, values, displayValues) {
-      console.log(values, displayValues);
-    }
-  });
-</script>
+
 </body>
 </html>
