@@ -900,7 +900,7 @@ class WeixinController extends HomeController
 		'button'=>array(array(
 		  "type"=>urlencode("view"),
           "name"=>urlencode("走进立法"),
-		  "url"=>urlencode("http://yanjingke.w3.luyouxia.net/".$url)
+		  "url"=>urlencode("http://222.18.54.30:8080/".$url)
          	
 		),
 		array(

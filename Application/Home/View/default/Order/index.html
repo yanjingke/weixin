@@ -40,15 +40,13 @@ $(function(){
 		//alert(url);
 		//saveSeniorset(r);
 		
-		
 		//r=jQuery.parseJSON(r);
-		alert(r.Wechat_code+"sddass");
-		if(r&&r["s_surprise"]){
-			surpriseflag=r["s_surprise"]
-		}
-		if(!r || !r["id"]){
+			
+	//alert(r[0].id);	
+		if(!r || !r[0]["id"]){
 			return;
 		}
+		alert(r[0].id);
 		for(var i=0;i<r["a_key"].length;i++){
 			var a_key = r["a_key"][i];
 			var key = a_key["key"];

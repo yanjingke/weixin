@@ -16,7 +16,7 @@
  function addItemstab1(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 // 生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/dynamic";
+	 var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/dynamic";
 	  var b=lastIndex;
 	  if(b!=a){
 	    $.ajax({
@@ -31,7 +31,7 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://222.18.54.30:8080/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
@@ -48,7 +48,7 @@
  function addItemstab2(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 //生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/planList";
+	 var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/planList";
 	  var b=lastIndex;
 	  if(b!=c){
 	    $.ajax({
@@ -62,7 +62,7 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://222.18.54.30:8080/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
@@ -79,7 +79,7 @@
  function addItemstab3(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 //生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/publicityList";
+	 var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/publicityList";
 	  var b=lastIndex;
 	  if(b!=d){
 	    $.ajax({
@@ -93,7 +93,7 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://222.18.54.30:8080/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
@@ -110,7 +110,7 @@
  function addItemstab4(number, lastIndex) {
 		// alert(lastIndex+"  "+number);
 //生成新条目的HTML
-	 var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/newlawList";
+	 var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/newlawList";
 	  var b=lastIndex;
 	  if(b!=e){
 	    $.ajax({
@@ -124,7 +124,7 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://222.18.54.30:8080/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
@@ -157,7 +157,7 @@ $('.infinite-scroll.active .list-container').append(html);
 				content.ptime="";
 			}
 		 //alert(content.img_url);
-	 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+	 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://222.18.54.30:8080/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 	 		  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 	 		  });
 
@@ -173,7 +173,7 @@ $('.infinite-scroll.active .list-container').append(html);
     var itemsPerLoad = 15;
     // 最多可加载的条目
     var maxItems = 500;
-    var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/dynamic";
+    var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/dynamic";
     $.ajax({
 		url:url,
 		type: "get",
@@ -183,7 +183,7 @@ $('.infinite-scroll.active .list-container').append(html);
     }
     })
     var count=null;
-     var url= "http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Legislativtre/count.html";
+     var url= "http://222.18.54.30:8080/index.php/Home/Legislativtre/count.html";
     $.ajax({
 		url:url,
 		type: "get",
