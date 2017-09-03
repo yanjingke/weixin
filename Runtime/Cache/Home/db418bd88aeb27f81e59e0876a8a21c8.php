@@ -43,7 +43,7 @@ var _hmt = _hmt || [];
   </head>
   <body>
     <div class="page-group">
-    <div id="page-fixed-tab-infinite-scroll" class="page"  data-distance="40">
+    <div id="page-fixed-tab-infinite-scroll" class="page"  data-distance="50">
   <header class="bar bar-nav">
    
     <h1 class="title">立法</h1>

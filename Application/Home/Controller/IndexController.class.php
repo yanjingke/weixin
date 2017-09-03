@@ -69,8 +69,7 @@ class IndexController extends WeixinController {
      */
     public function order()
     {
-        //$uid = $_SESSION['uid'];
-           $uid = 19;
+        $uid = $_SESSION['uid'];
         $model = M('tags');
         $res = $model -> select();
         foreach($res as &$v)
@@ -153,7 +152,7 @@ class IndexController extends WeixinController {
             foreach($list as $n)
             {
                 $str .= '
-	<li class="clearfix" >
+				<li class="clearfix" >
                     <div class="yb-ul-title clearfix" a="'.$n['id'].'">
                         <input type="hidden" name="id" value="'.$n['id'].'">
                         <h2 class="zq-name fL"><img src="http://test.fixstyle.cn/Public/Home/images/gf.png">'.$n['source'].'</h2>
@@ -263,7 +262,7 @@ class IndexController extends WeixinController {
                 $start = strtotime(I('post.s'));
                 $end = strtotime(I('post.e'));
             }
-			
+
             $all = $model->query("select * from wx_news where( status = 1 and  ptime > $start and ptime < $end ) order by ptime desc ");
         }
         elseif($type == 'area')
@@ -271,16 +270,13 @@ class IndexController extends WeixinController {
             $area = I('post.area');
             $arr = explode(' ',$area);
             $str = str_replace('市','',$arr[1]);
-         	$where['area'] = array('like',"%$str%");
-            $all = $model->where($where)->select();
+            $all = $model->where(" area = '$str' ")->select();
         }
         elseif($type == 'words')
         {
             $words = I('post.words');
             $map['title'] = array('like',"%$words%");
-             $all = $model->where($map)->select();
-            file_put_contents(APP_PATH.'Home/Controller/log.txt',  $all."是发送到发送到   ",FILE_APPEND );
-           
+            $all = $model->where($map)->select();
         }
         if($all)
         {

@@ -880,7 +880,8 @@ class WeixinController extends HomeController
 		return  date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
 	}
 	function createmenu(){
-			$url=U('Index/Legislativtre');
+			$token = $this->getLocalToken();
+		$url=U('Legislativtre/index');
 			
 		$arrsubsearch=array(array(
 		  "type"=>urlencode("view"), 
@@ -890,7 +891,7 @@ class WeixinController extends HomeController
 		),
 		array(
 		  "type"=>urlencode("view"), 
-		  "url"=>urlencode("http://m.hao123.com/a/tianqi"),
+		  "url"=>urlencode('https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$token.'&redirect_uri=yanjingke.w3.luyouxia.net/weixin/index.php/Home/Order/Index&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'),
 		  "name"=>urlencode("订阅推送"), 
 		  
 		)
@@ -900,7 +901,7 @@ class WeixinController extends HomeController
 		'button'=>array(array(
 		  "type"=>urlencode("view"),
           "name"=>urlencode("走进立法"),
-		  "url"=>urlencode("http://222.18.54.30:8080/".$url)
+		  "url"=>urlencode("http://222.18.54.30:8080".$url)
          	
 		),
 		array(

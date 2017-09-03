@@ -43,35 +43,37 @@ $(function(){
 		//r=jQuery.parseJSON(r);
 			
 	//alert(r[0].id);	
-		if(!r || !r[0]["id"]){
+		if(!r || !r[0]){
 			return;
 		}
-		alert(r[0].id);
-		for(var i=0;i<r["a_key"].length;i++){
-			var a_key = r["a_key"][i];
-			var key = a_key["key"];
-			if(!key){
-				continue;
-			}
-			if(i==0&&surpriseflag==""){
-				$(".keyWordContent .keyWordGroup").eq(0).append(suphtml);
-				dissurp();
-			}
+		//alert(r[0].length);
+		
+		$.each(r, function(i, content){
+			var key = content.Subject;	
 			var kwgObj = $(".keyWordGroup:eq("+i+")");
-			kwgObj.find(".keyword").val($.trim(key.join(" ")));
-			if((a_key["area"] && a_key["area"].length > 0) || (a_key["infotype"] && a_key["infotype"].length > 0) || (a_key["notkey"] && a_key["notkey"].length > 0)){
+			//alert(key);
+	
+			kwgObj.find(".keyword").val(key);
+		
+			if((content.District)&&(content.Ex_subect)&&(content.type)){
+				
+				kwgObj.attr('id', content.id);
+				
 				kwgObj.addClass("hasset");
 			}else{
+
+				kwgObj.attr('id', content.id);
 				kwgObj.addClass("hasinput");
 			}
-		}
+			})
+		
 	});
 	
 	$(".help").click(function(){
 		window.open("http://mp.weixin.qq.com/mp/homepage?__biz=MzIyNTM1NDUyNw==&hid=3&sn=badf2d7da08654c58b58169e773f58f0#wechat_redirect");
 	});
 	$(".keyword").on("input propertychange",function(){
-		saveData();
+		//saveData();
 		if(istiped){
 			$("#easyAlert").hide();
 		}
@@ -154,12 +156,15 @@ $(function(){
 		$(this).parents(".keyWordGroup").removeClass("hasinput hasset");
 	});
 	$(".seniorset").click(function(){
-		window.location.href = "/wxkeyset/keyset/seniorset";
+		window.location.href = "/weixin/index.php/Home/Order/push";
 	});
 	$(".set2,.set3").click(function(){
 		var parentObj = $(this).parents(".keyWordGroup");
+		
 		var value = parentObj.find(".keyword").val();
 		var index = parentObj.index();
+		var id= parentObj.attr('id');
+		//alert(id);
 		var thisIndex = index;
 		$(".keyword").each(function(i){
 			if(i < thisIndex && filterKeyword($(this).val()) == ""){
@@ -169,7 +174,8 @@ $(function(){
 		$("#surprise").fadeOut("normal");
 		$("#sp1").fadeOut("normal");
 		$("#sp2").fadeOut("normal");
-		window.location.href = "/wxkeyset/keyset/filterset?index="+index+"&keyword="+escape(value);
+		
+		window.location.href = "/weixin/index.php/Home/Order/details?index="+index+"&keyword="+escape(value)+"&id="+id;
 	});
 	$(".complate").click(function(){});
 	document.onkeydown = function () {
@@ -221,30 +227,50 @@ function surswitch(){
 function filterKeyword(value){
 	return value.replace(keywordReg,"");
 }
-function saveData(){
+
+function copyText(){
+
 	var param = {
-		"reqType": "saveKeyWords",
-		"keyWords": [],
-		"indexs": []
-	};
-	$(".keyword").each(function(i){
-		var thisValue = $.trim($(this).val());
-		if(thisValue == ""){
-			return true;
-		}
-		param["indexs"].push(i);
-		param["keyWords"].push(thisValue);
-	});
-	$.ajax({
-		type: "POST",
-		url: "/wxkeyset/ajaxReq",
-		data: param,
-		dataType: "json",
-		traditional: true,
-		success: function(r){
+			//"reqType": "saveKeyWords",
+			"keyWords1":[],
 			
-		}
-	});
+			"ids":[]
+		};
+		$(".keyword").each(function(i){
+			var thisValue = $.trim($(this).val());
+			if(thisValue == ""){
+				return true;
+			}
+			
+			var parentObj = $(this).parents(".keyWordGroup");
+			var id=parentObj.attr("id")
+			//alert(id);
+			//alert(id);
+			if(!id){
+				id="a";
+				}
+			//alert(id);
+			//alert(thisValue);
+			param["keyWords1"].push(thisValue);
+		//	param["indexs"].push(i);
+			param["ids"].push(id);
+		
+			
+		});
+	
+		$.ajax({
+			type: "POST",
+			url: "/weixin/index.php/Home/Order/addate",
+			data:param,
+			dataType: "json",
+			
+			success: function(r){
+			alert("sddas");
+				alert(param["keyWords1"][2]);
+				alert(param["keyWords1"][0]);
+				alert(param["keyWords1"][3]);
+			}
+		});
 }
 
 function checkKeys(obj){
@@ -330,7 +356,7 @@ function loadRecoms(inputObj,datas){
 		}
 		inputObj.val($(this).text());
 		inputObj.parents(".keyWordGroup").addClass("hasinput");
-		saveData();
+		//saveData();
 		
 		$.post("/member/behaviorRecord",{"source":"mobile","value":$(this).text(),"type":"subscribe_tj"});
 		
@@ -349,7 +375,7 @@ function getRecomKWs(inputObj){
 		inputObj.parents(".keyWordGroup").nextAll(".keyWordGroup").show();
 		return;
 	}
-	
+	//alert(valueArray);_
 	var valueArrayTemp = [];
 	for(var i in valueArray){
 		var isExists = false;
@@ -366,20 +392,7 @@ function getRecomKWs(inputObj){
 			valueArrayTemp.push(valueArray[i]);
 		}
 	}
-	$.post("/member/getRecomKWs",{count:count,value:valueArrayTemp.join(" ").toUpperCase()},function(data){
-		if(typeof(data) == "undefined" || data == null || data.length == 0){
-			$(".relRecom").hide();
-			inputObj.parents(".keyWordGroup").nextAll(".keyWordGroup").show();
-			return;
-		}
-		var newData = filterRecomDatas(data,valueArrayTemp,count);
-		if(newData.length == 0){
-			$(".relRecom").hide();
-			inputObj.parents(".keyWordGroup").nextAll(".keyWordGroup").show();
-			return;
-		}
-		loadRecoms(inputObj,newData);
-	});
+	
 }
 function getKeyWords(){
 	var hasKeyWords = [];
@@ -490,7 +503,7 @@ function saveSeniorset(r){
 <body class="keysetpage">
 	<div class="header">
 		<span class="header-title">订阅关键词<img class="help" src="__STATIC__/datetimepicker/img/help-b.png"></span>
-		<span class="complate hide">完成</span>
+		<span class="complate hide" onclick="copyText()">完成</span>
 		<span class="seniorset" style="float: right;font-size: 15px;color: #686868;"><img src="__STATIC__/datetimepicker/img/set.png" style="width: 17px;margin-right: 4px;margin-top: -3px;">推送选项</span>
 	</div>
 	<div class="keyWordContent">

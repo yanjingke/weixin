@@ -17,18 +17,31 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
 </head>
 <script>
+$(function(){
+	if({$info[0][start]}){
+		$(".infopush").html("{$info[0][start]}点-{$info[0][end]}点实时推送信息");
+
+		}
+	else{
+		$(".infopush").html("全天24小时实时推送信息");
+
+		}
+		
+	   
+	
+})
     function condition()
     {
         var time = $("#times").val();
         var url = "{:U('setTime')}";
-        var u = {$uid};
+        var u = '{$uid}';
         $.post(url,{type:time,u:u},function(data){
             if(data=='1'){
                 alert('设置成功');
             }else{
                 alert('设置失败');
             }
-            window.location.href = "{:U('Index/order')}";
+            window.location.href = "{:U('Order/index')}";
         });
     }
     function turn()
@@ -78,11 +91,10 @@
         <div class="weui-cell__bd">
             <p>自定义时间</p>
             <p class="push-time">
-                <eq name="info.push" value="3">
-                    {$info.start}点-{$info.end}点实时推送信息
-                    <else/>
-                    全天24小时实时推送信息
-                </eq>
+                <p name="info.push" class="infopush"  value="3">
+                
+                
+                 </p>
                 </p>
         </div>
         <div class="weui-cell__ft">
@@ -168,6 +180,7 @@
         $("#subBtn").click(function(){
             var time = $("#mySelect").val();
             var time1 = $("#mySelect1").val();
+            $(".infopush").text("");
            $(".push-time").text(time+"点-"+time1+"点实时推送信息");
            $("#x13").attr("value",time+","+time1) ;
            $("#times").val($("#x13").val());

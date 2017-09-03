@@ -1,39 +1,52 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" />
-    <link rel="stylesheet" type="text/css" href="__CSS__/index.css" />
-    <link rel="stylesheet" type="text/css" href="__CSS__/demo.css" />
-    <link rel="stylesheet" href="__CSS__/weui.min.css"/>
-    <link rel="stylesheet" href="__CSS__/jquery-weui.min.css"/>
-    <link rel="stylesheet" href="__CSS__/style.css"/>
-    <script type="text/javascript" src="__JS__/jquery.min.js"></script>
-    <script type="text/javascript" src="__JS__/jquery-weui.min.js"></script>
-    <script src="__JS__/picker.min.js"></script>
-    <script src="__JS__/city.js"></script>
+    <link rel="stylesheet" type="text/css" href="/weixin/Public/Home/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/weixin/Public/Home/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/weixin/Public/Home/css/demo.css" />
+    <link rel="stylesheet" href="/weixin/Public/Home/css/weui.min.css"/>
+    <link rel="stylesheet" href="/weixin/Public/Home/css/jquery-weui.min.css"/>
+    <link rel="stylesheet" href="/weixin/Public/Home/css/style.css"/>
+    <script type="text/javascript" src="/weixin/Public/Home/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/weixin/Public/Home/js/jquery-weui.min.js"></script>
+    <script src="/weixin/Public/Home/js/picker.min.js"></script>
+    <script src="/weixin/Public/Home/js/city.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
 </head>
 <script>
+$(function(){
+	if(<?php echo ($info[0][start]); ?>){
+		$(".infopush").html("<?php echo ($info[0][start]); ?>点-<?php echo ($info[0][end]); ?>点实时推送信息");
+
+		}
+	else{
+		$(".infopush").html("全天24小时实时推送信息");
+
+		}
+		
+	   
+	
+})
     function condition()
     {
         var time = $("#times").val();
-        var url = "{:U('setTime')}";
-        var u = {$uid};
+        var url = "<?php echo U('setTime');?>";
+        var u = '<?php echo ($uid); ?>';
         $.post(url,{type:time,u:u},function(data){
             if(data=='1'){
                 alert('设置成功');
             }else{
                 alert('设置失败');
             }
-            window.location.href = "{:U('Index/order')}";
+            window.location.href = "<?php echo U('Order/index');?>";
         });
     }
     function turn()
     {
-        window.location.href = "{:U('Index/lists')}";
+        window.location.href = "<?php echo U('Index/lists');?>";
     }
 
 
@@ -45,7 +58,7 @@
 
 <div class="weui-cells weui-cells_radio">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><img class="pus-ico" src="__IMG__/pushcheck.png"></div>
+        <div class="weui-cell__hd"><img class="pus-ico" src="/weixin/Public/Home/images/pushcheck.png"></div>
         <div class="weui-cell__bd pus-title">
             <p>推送时间</p>
         </div>
@@ -78,11 +91,10 @@
         <div class="weui-cell__bd">
             <p>自定义时间</p>
             <p class="push-time">
-                <eq name="info.push" value="3">
-                    {$info.start}点-{$info.end}点实时推送信息
-                    <else/>
-                    全天24小时实时推送信息
-                </eq>
+                <p name="info.push" class="infopush"  value="3">
+                
+                
+                 </p>
                 </p>
         </div>
         <div class="weui-cell__ft">
@@ -96,7 +108,7 @@
 <div class="weui-cells weui-cells_form">
 
     <div class="weui-cell">
-        <div class="weui-cell__hd"><img class="pus-ico" src="__IMG__/msg.png"></div>
+        <div class="weui-cell__hd"><img class="pus-ico" src="/weixin/Public/Home/images/msg.png"></div>
         <div class="weui-cell__bd pus-title">
             <p>推送方式</p>
         </div>
@@ -121,7 +133,7 @@
 
 <div class="weui-cells">
     <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd"><img class="pus-ico" src="__IMG__/preview.png"></div>
+        <div class="weui-cell__hd"><img class="pus-ico" src="/weixin/Public/Home/images/preview.png"></div>
         <div class="weui-cell__bd pus-title">
             <p onclick="turn()">推送结果预览</p>
         </div>
@@ -129,7 +141,7 @@
         </div>
     </a>
     <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd"><img class="pus-ico"src="__IMG__/preview.png"></div>
+        <div class="weui-cell__hd"><img class="pus-ico"src="/weixin/Public/Home/images/preview.png"></div>
         <div class="weui-cell__bd pus-title">
             <p onclick="turn()">历史推送记录</p>
         </div>
@@ -168,6 +180,7 @@
         $("#subBtn").click(function(){
             var time = $("#mySelect").val();
             var time1 = $("#mySelect1").val();
+            $(".infopush").text("");
            $(".push-time").text(time+"点-"+time1+"点实时推送信息");
            $("#x13").attr("value",time+","+time1) ;
            $("#times").val($("#x13").val());
