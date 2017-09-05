@@ -124,14 +124,6 @@ error: function(){
 			</li>
 		</ul>
 	</div>
-	<script>
-var _hmt = _hmt || [];
-(function() {
-	var hm = document.createElement("script");
-	hm.src = "/baiducc";
-	var s = document.getElementsByTagName("script")[0]; 
-	s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 </body>
 </html>

@@ -10,7 +10,7 @@ class OrderController extends WeixinController {
 //		 $res->where($where)->select();
 		// $res= ;
 		$v=$_GET['code'];
-		file_put_contents(APP_PATH.'Home/Controller/log.txt',$v,FILE_APPEND );
+	
         $this->display();
     }
 	
@@ -57,7 +57,7 @@ class OrderController extends WeixinController {
 		
 		}  
 
- 	
+ 	 $this->ajaxReturn (true,'JSON');
 		
 	
 	}
@@ -147,6 +147,7 @@ public function notkey()
         $this->display();
     }
 public function updatearea()
+
     {
     	 	$User= M('member1');
     		 $uid ="oVlAk1FERsBqUNcq7dMeUIqg-2xE";
@@ -273,6 +274,7 @@ public function findonenotkey()
       //  $uid=1;
          $where['openid'] = $uid; 
         $info = M('user')->where($where)->select();
+        file_put_contents(APP_PATH.'Home/Controller/log.txt', $info[0][end].$info[0][strat],FILE_APPEND);
         $this->assign('uid',$uid);
         $this->assign('info',$info);
        // 
@@ -372,7 +374,7 @@ public function findonenotkey()
                     </li>';
             }
             $str .= '</ul>';
-            file_put_contents(APP_PATH.'Home/Controller/log.txt',   $str ,FILE_APPEND );
+         //   file_put_contents(APP_PATH.'Home/Controller/log.txt',   $str ,FILE_APPEND );
             echo $str;
         }
         else
@@ -413,6 +415,21 @@ public function findonenotkey()
            echo $str;
         }
          //$this->ajaxReturn ( $list,'JSON');
+    }
+ public function  getTypeListCount()
+    {
+      
+        import('ORG.Util.Page');// 导入分页类
+      	$first=$_POST['first'];
+          // $first = "";
+         // 
+        $arr['title']=array('like',"%$first%");
+      
+      file_put_contents(APP_PATH.'Home/Controller/log.txt',$arr['title'],FILE_APPEND );
+	  	 $count=M('news')->where($arr)->count();// 查
+	      $this->ajaxReturn ( $count,'JSON');
+        
+       
     }
     
 

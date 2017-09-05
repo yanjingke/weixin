@@ -254,7 +254,7 @@ function copyText(){
 			param["keyWords1"].push(thisValue);
 		//	param["indexs"].push(i);
 			param["ids"].push(id);
-		
+			///alert("sddas");
 			
 		});
 	
@@ -265,10 +265,8 @@ function copyText(){
 			dataType: "json",
 			
 			success: function(r){
-			alert("sddas");
-				alert(param["keyWords1"][2]);
-				alert(param["keyWords1"][0]);
-				alert(param["keyWords1"][3]);
+			  location.reload();
+			
 			}
 		});
 }
@@ -642,13 +640,5 @@ function saveSeniorset(r){
 		<span>您订阅的关键词字数过多，可能会收不到推送信息。点击 “？”图标查看订阅技巧帮助页面。</span>
 		<span>您订阅的关键词包含特殊符号，可能会收不到推送信息。点击 “？”图标查看订阅技巧帮助页面。</span>
 	</div>
-	<script>
-var _hmt = _hmt || [];
-(function() {
-	var hm = document.createElement("script");
-	hm.src = "/baiducc";
-	var s = document.getElementsByTagName("script")[0]; 
-	s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 </body>

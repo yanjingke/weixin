@@ -891,7 +891,7 @@ class WeixinController extends HomeController
 		),
 		array(
 		  "type"=>urlencode("view"), 
-		  "url"=>urlencode('https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$token.'&redirect_uri=yanjingke.w3.luyouxia.net/weixin/index.php/Home/Order/Index&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'),
+		  "url"=>urlencode('https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$token.'&redirect_uri=222.18.54.30:8080/weixin/index.php/Home/Order/Index&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect'),
 		  "name"=>urlencode("订阅推送"), 
 		  
 		)

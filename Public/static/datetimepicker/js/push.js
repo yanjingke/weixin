@@ -31,7 +31,7 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div><span style="float:right;">'+ content.ptime+'</span></div> </li>  ';
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
 				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
@@ -62,8 +62,8 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div><span style="float:right;">'+ content.ptime+'</span></div> </li>  ';
-				 		  	
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -93,8 +93,8 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div><span style="float:right;">'+ content.ptime+'</span></div> </li>  ';
-				 		 	
+					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -124,8 +124,8 @@
 					if(content.ptime==false){
 						content.ptime="";
 					}
-					html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div><span style="float:right;">'+ content.ptime+'</span></div> </li>  ';
-				 		 	
+				 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+				 	
 						  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 						  });
 				   $('.infinite-scroll.active .list-container').append(html);
@@ -157,8 +157,8 @@ $('.infinite-scroll.active .list-container').append(html);
 				content.ptime="";
 			}
 		 //alert(content.img_url);
-		 html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="http://yanjingke.w3.luyouxia.net/weixin/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div><span style="float:right;">'+ content.ptime+'</span></div> </li>  ';
-		 	 		  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
+	 	html +=  '<li class="item-content"> <div class="item-media"><img src="'+content.img_url+'" width="44"></div> <div class="item-inner"><div class="item-title-row"><div class="item-title"><a href="/index.php/Home/Index/detail/id/'+content.id +'.html">'+content.title+'</a></div></div><div class="item-subtitle"><font color="#BEBEBE">'+content.clean_content+'</font></div></div> </li><div class="card-footer"><span></span><span >'+ content.ptime+'</span></div>  ';
+	 		  // alert( "the man's no. is: " + index + ",and " + content.name + " is learning " + content.lang ); 
 	 		  });
 
 	 // 添加新条目
@@ -248,7 +248,7 @@ $('.infinite-scroll.active .list-container').append(html);
     	addItemstab1(itemsPerLoad, lastInde2);
         }
       if($(this).find('.infinite-scroll.active').attr('id') == "tab2"){
-    	 //alert("assdad");
+    	 
         //var lastIndex1= $('#tab2 .list-container li')[0].length;
     	  var lastInde2=0;
           tabIndex = 0;

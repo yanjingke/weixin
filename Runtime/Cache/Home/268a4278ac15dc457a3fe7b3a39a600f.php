@@ -69,7 +69,7 @@
 	count=$("#count").text();
 	if(count%15==0){
 		if(tem>=count/15){
-			  $("#xinwen").hide();
+			 $("#xinwen").hide();
 		}
 	}
 	else{
@@ -84,12 +84,25 @@
             var id = $(".tabslider li:last-child .yb-ul-title").attr('a');
             var first=$("#bu").text();
             var html = $(".tabslider").html();
+            if(count%15==0){
+        		if(tem>=count/15){
+        			 $("#xinwen").hide();
+        		}
+        	}
+        	else{
+        		if(tem>=(count-count%15)/15){
+        			 $("#xinwen").hide();
+        		}
+
+        		}
          //	alert(tem);
             var url = "<?php echo U('more');?>";
             //alert(tem);
+            
             $.post(url,{id:id,"p":tem,"first":first},function(data){
                 if(data)
                 {
+                  
                     $(".tabslider").html(html+data);
                 }
             });
@@ -106,6 +119,7 @@
             $(obj).css("background-color",'');
             $(obj).attr("id","bu");
             var first=$("#bu").text();
+           
             var u = "<?php echo U('getTypeList');?>";
             $.post(u,{"first":first},function(data){
                 if(data)
@@ -113,6 +127,14 @@
                     $(".idx-content").html(data);
                 }
             });
+            var u1 = "<?php echo U('getTypeListCount');?>";
+            $.post(u1,{"first":first},function(data){
+            	count=data;
+            	if(count>15){
+            		 $("#xinwen").show();
+            		 $("#count").html(count);
+                	}
+            });	
         }
 
     </script>

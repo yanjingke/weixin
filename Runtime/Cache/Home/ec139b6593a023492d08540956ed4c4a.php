@@ -18,6 +18,7 @@
 </head>
 <script>
 $(function(){
+	
 	if(<?php echo ($info[0][start]); ?>){
 		$(".infopush").html("<?php echo ($info[0][start]); ?>点-<?php echo ($info[0][end]); ?>点实时推送信息");
 
@@ -46,7 +47,7 @@ $(function(){
     }
     function turn()
     {
-        window.location.href = "<?php echo U('Index/lists');?>";
+        window.location.href = "<?php echo U('Order/lists');?>";
     }
 
 
